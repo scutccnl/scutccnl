@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>【machine learning】KNN算法         | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="适逢学习机器学习基础知识，就将书中内容读读记记，本博文代码参考书本Machine Learning in Action（《机器学习实战》）。
+一、概述kNN算法又称为k近邻分类(k-nearest neighbor classification)算法。
+kNN算法则是从训练集中找到和新数据最接近的k条记录，然后根据他们的主要分类来决定新数据的类别。该算法涉及3个主要因素：训练集、距离或相似的衡量、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【machine learning】KNN算法        ">
+<meta property="og:url" content="https://enjoyhot.github.io/2015/02/25/machinelearning-KNN/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="适逢学习机器学习基础知识，就将书中内容读读记记，本博文代码参考书本Machine Learning in Action（《机器学习实战》）。
+一、概述kNN算法又称为k近邻分类(k-nearest neighbor classification)算法。
+kNN算法则是从训练集中找到和新数据最接近的k条记录，然后根据他们的主要分类来决定新数据的类别。该算法涉及3个主要因素：训练集、距离或相似的衡量、">
+<meta property="og:image" content="http://img.blog.csdn.net/20150225162324294?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VndWd1amlhd2Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="http://img.blog.csdn.net/20150225165135118?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VndWd1amlhd2Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【machine learning】KNN算法        ">
+<meta name="twitter:description" content="适逢学习机器学习基础知识，就将书中内容读读记记，本博文代码参考书本Machine Learning in Action（《机器学习实战》）。
+一、概述kNN算法又称为k近邻分类(k-nearest neighbor classification)算法。
+kNN算法则是从训练集中找到和新数据最接近的k条记录，然后根据他们的主要分类来决定新数据的类别。该算法涉及3个主要因素：训练集、距离或相似的衡量、">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150225162324294?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VndWd1amlhd2Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-machinelearning-KNN" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            【machine learning】KNN算法        
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/02/25/machinelearning-KNN/">
+            <time datetime="2015-02-25T08:04:00.000Z" itemprop="datePublished">2015-02-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ML-foundation/">ML foundation</a>, <a class="tag-link" href="/tags/classifier/">classifier</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>适逢学习机器学习基础知识，就将书中内容读读记记，本博文代码参考书本Machine Learning in Action（《机器学习实战》）。</p>
+<h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p>kNN算法又称为k近邻分类(k-nearest neighbor classification)算法。</p>
+<p>kNN算法则是从训练集中找到和新数据最接近的k条记录，然后根据他们的主要分类来决定新数据的类别。该算法涉及3个主要因素：训练集、距离或相似的衡量、k的大小。<br><a id="more"></a></p>
+<h1 id="二、算法要点"><a href="#二、算法要点" class="headerlink" title="二、算法要点"></a>二、算法要点</h1><p><strong>1、指导思想</strong><br>kNN算法的指导思想是“近朱者赤，近墨者黑”，由你的邻居来推断出你的类别。</p>
+<p>计算步骤如下：<br>1）算距离：给定测试对象，计算它与训练集中的每个对象的距离<br>2）找邻居：圈定距离最近的k个训练对象，作为测试对象的近邻<br>3）做分类：根据这k个近邻归属的主要类别，来对测试对象分类</p>
+<p><strong>2、距离或相似度的衡量</strong><br>什么是合适的距离衡量？距离越近应该意味着这两个点属于一个分类的可能性越大。<br>距离衡量包括欧式距离、夹角余弦等。<br>对于文本分类来说，使用余弦(cosine)来计算相似度就比欧式(Euclidean)距离更合适。</p>
+<p><strong>3、类别的判定</strong><br>投票决定：少数服从多数，近邻中哪个类别的点最多就分为该类，属于以频率为标准。<br>加权投票法：根据距离的远近，对近邻的投票进行加权，距离越近则权重越大（权重为距离平方的倒数），属于以量化为标准。</p>
+<h1 id="三、优缺点"><a href="#三、优缺点" class="headerlink" title="三、优缺点"></a>三、优缺点</h1><p><strong>1、优点</strong><br>简单，易于理解，易于实现，无需估计参数，无需训练<br>适合对稀有事件进行分类（例如当流失率很低时，比如低于0.5%，构造流失预测模型）<br>特别适合于多分类问题(multi-modal,对象具有多个类别标签)，例如根据基因特征来判断其功能分类，kNN比SVM的表现要好</p>
+<p><strong>2、缺点</strong><br>懒惰算法，对测试样本分类时的计算量大，内存开销大，评分慢<br>可解释性较差，无法给出决策树那样的规则。</p>
+<h1 id="四、利用KNN进行手写识别"><a href="#四、利用KNN进行手写识别" class="headerlink" title="四、利用KNN进行手写识别"></a>四、利用KNN进行手写识别</h1><p>假如存在训练数据，都是二值得灰度图，来源于手写面板的采集图像数据。如下表示数字‘0’，所在文件夹下包括表示0~9的文件，文件夹命名A_B.txt,A表示真实数字，B表示该数字的第B个样本（一般数据越多有有利于接近预测值）</p>
+<p>   <img src="http://img.blog.csdn.net/20150225162324294?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VndWd1amlhd2Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="image_mark"></p>
+<p> 在另一个文件夹中，也存在同样命名的数据文件，用于检验有监督学习下的准确率，我们称为测试数据。<br>在代码中，我们需要三个函数</p>
+<blockquote>
+<p>def classify0(inX, dataSet, labels, k)——用于对输入单个样本inX进行分类，dataSet为训练数据，labels为训练数据的类别，K为近邻范围<br>def img2vector(filename)——将文件filename中的数据规格由32X32转换为1X1024的向量<br>def handwritingClassTest()——利用测试数据进行测试，得出错误率<br>我这里只用了0~9分别20个训练数据而已，提高速度。需要源代码可以到机器学习实战的配套代码中取<br>  <a href="http://vdisk.weibo.com/s/uEZesAafcjQgx?sudaref=www.baidu.com" target="_blank" rel="external">http://vdisk.weibo.com/s/uEZesAafcjQgx?sudaref=www.baidu.com</a></p>
+</blockquote>
+<p>代码中用到了numpy库，numpy库用在数据量大的计算较高效</p>
+<p><strong>numpy用法小抄：</strong><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>tile([<span class="number">0</span>, <span class="number">0</span>], (<span class="number">1</span>, <span class="number">2</span>))</div><div class="line">array([[<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>tile([<span class="number">0</span>, <span class="number">0</span>], (<span class="number">2</span>, <span class="number">1</span>))</div><div class="line">array([[<span class="number">0</span>, <span class="number">0</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">0</span>]])</div><div class="line">`</div></pre></td></tr></table></figure></p>
+<p>第一个是矩阵A<br>第二个参数是要 只有一个数字时，表示 对 A中元素重复的次数<br>两个参数时（x， y） y表示对A中元素重复的次数， x表示 对前面的操作执行x次。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>b= np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b</div><div class="line">array([[ <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</div><div class="line">           [ <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>],</div><div class="line">           [ <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b.sum(axis=<span class="number">0</span>) <span class="comment"># 计算每一列的和，注意理解轴的含义，参考数组的第一篇文章</span></div><div class="line">array([<span class="number">12</span>, <span class="number">15</span>, <span class="number">18</span>, <span class="number">21</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b.min(axis=<span class="number">1</span>) <span class="comment"># 获取每一行的最小值</span></div><div class="line">array([<span class="number">0</span>, <span class="number">4</span>, <span class="number">8</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>b.cumsum(axis=<span class="number">1</span>) <span class="comment"># 计算每一行的累积和</span></div><div class="line">array([[ <span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">6</span>],</div><div class="line">           [ <span class="number">4</span>, <span class="number">9</span>, <span class="number">15</span>, <span class="number">22</span>],</div><div class="line">           [ <span class="number">8</span>, <span class="number">17</span>, <span class="number">27</span>, <span class="number">38</span>]])</div></pre></td></tr></table></figure>
+<p>需要用到再另外写博客进行补充。<br>KNN.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> operator</div><div class="line"><span class="keyword">from</span> os <span class="keyword">import</span> listdir</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify0</span><span class="params">(inX, dataSet, labels, k)</span>:</span></div><div class="line">    <span class="comment">#inX------[x,x,x,x]</span></div><div class="line">    <span class="comment">#dataSet------array([[x,x,x,x],[x,x,x,x]])</span></div><div class="line">    <span class="comment">#labels------[x,x]</span></div><div class="line">    <span class="comment">#k------n</span></div><div class="line">    dataSetSize = dataSet.shape[<span class="number">0</span>]</div><div class="line">    diffMat = tile(inX, (dataSetSize,<span class="number">1</span>)) - dataSet</div><div class="line">    sqDiffMat = diffMat**<span class="number">2</span></div><div class="line">    sqDistances = sqDiffMat.sum(axis=<span class="number">1</span>)</div><div class="line">    distances = sqDistances**<span class="number">0.5</span></div><div class="line">    sortedDistIndicies = distances.argsort()     </div><div class="line">    classCount=&#123;&#125;          </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div><div class="line">        voteIlabel = labels[sortedDistIndicies[i]]</div><div class="line">        classCount[voteIlabel] = classCount.get(voteIlabel,<span class="number">0</span>) + <span class="number">1</span></div><div class="line">        </div><div class="line">    <span class="comment">#将字典按value值大小降序排序,结果为二维列表</span></div><div class="line">    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="keyword">True</span>)</div><div class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">img2vector</span><span class="params">(filename)</span>:</span></div><div class="line">    returnVect = zeros((<span class="number">1</span>,<span class="number">1024</span>))</div><div class="line">    fr = open(filename,<span class="string">'r'</span>)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">32</span>):</div><div class="line">        lineStr = fr.readline()</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>):</div><div class="line">            returnVect[<span class="number">0</span>,<span class="number">32</span>*i+j] = int(lineStr[j])</div><div class="line">    <span class="keyword">return</span> returnVect</div><div class="line"></div><div class="line">trainFile = <span class="string">'F:\\python\\pyproject\\ML\\codes\\machinelearninginaction\\Ch02\\training20\\'</span></div><div class="line">testFile = <span class="string">'F:\\python\\pyproject\\ML\\codes\\machinelearninginaction\\Ch02\\testDigits\\'</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">handwritingClassTest</span><span class="params">()</span>:</span></div><div class="line">    hwLabels = []</div><div class="line">    trainingFileList = listdir(trainFile)           <span class="comment">#load the training set</span></div><div class="line">    m = len(trainingFileList)</div><div class="line">    trainingMat = zeros((m,<span class="number">1024</span>))</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</div><div class="line">        fileNameStr = trainingFileList[i]</div><div class="line">        fileStr = fileNameStr.split(<span class="string">'.'</span>)[<span class="number">0</span>]     <span class="comment">#take off .txt</span></div><div class="line">        classNumStr = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</div><div class="line">        hwLabels.append(classNumStr)</div><div class="line">        path = trainFile + <span class="string">'%s'</span></div><div class="line">        trainingMat[i,:] = img2vector(path % fileNameStr)</div><div class="line">    testFileList = listdir(testFile)        <span class="comment">#iterate through the test set</span></div><div class="line">    errorCount = <span class="number">0.0</span></div><div class="line">    mTest = len(testFileList)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(mTest):</div><div class="line">        fileNameStr = testFileList[i]</div><div class="line">        fileStr = fileNameStr.split(<span class="string">'.'</span>)[<span class="number">0</span>]     <span class="comment">#take off .txt</span></div><div class="line">        classNumStr = int(fileStr.split(<span class="string">'_'</span>)[<span class="number">0</span>])</div><div class="line">        path = testFile + <span class="string">'%s'</span></div><div class="line">        vectorUnderTest = img2vector(path % fileNameStr)</div><div class="line">        classifierResult = classify0(vectorUnderTest, trainingMat, hwLabels, <span class="number">3</span>)</div><div class="line">        <span class="keyword">print</span> <span class="string">"the classifier came back with: %d, the real answer is: %d"</span> % (classifierResult, classNumStr)</div><div class="line">        <span class="keyword">if</span> (classifierResult != classNumStr): errorCount += <span class="number">1.0</span></div><div class="line">    <span class="keyword">print</span> <span class="string">"\nthe total number of errors is: %d"</span> % errorCount</div><div class="line">    <span class="keyword">print</span> <span class="string">"\nthe total error rate is: %f"</span> % (errorCount/float(mTest))</div></pre></td></tr></table></figure>
+<p> 再在test.py中调用KNN.handwritingClassTest()，则程序开始运行</p>
+<p>  test.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> KNN</div><div class="line">KNN.handwritingClassTest()</div></pre></td></tr></table></figure>
+<p> 可看到错误率10.68%，挺高的，增加训练数据量就应该会减小一些。</p>
+<p>  <img src="http://img.blog.csdn.net/20150225165135118?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VndWd1amlhd2Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="image_mark"></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2015/02/25/machinelearning-KNN/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2015/02/25/machinelearning-KNN/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/03/19/study-thinking-20150319/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    学习感悟
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2015/01/21/python-scrapy/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">网络爬虫框架scrapy介绍及应用——抓取新浪新闻的标题内容评论        </div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2015/02/25/machinelearning-KNN/" data-title="【machine learning】KNN算法        " data-url="https://enjoyhot.github.io/2015/02/25/machinelearning-KNN/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

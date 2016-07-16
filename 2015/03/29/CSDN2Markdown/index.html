@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>export CSDN blog to Markdown | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="#一、综述
+最开始的博客用的是oschina, 自我感觉小清新，支持比较多风格的编辑器，容易编辑程度比csdn的要好。后来因为csdn人气的关系，又转到csdn，不过csdn编辑确实比较虐心，再后来就在服务器上搭一个WordPress的博客，不过用起来不是很爽。几个月前支持Markdown编辑，这无疑给用github pages的用户一个福音，因为可以直接上传到自己的github博客上。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="export CSDN blog to Markdown">
+<meta property="og:url" content="https://enjoyhot.github.io/2015/03/29/CSDN2Markdown/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="#一、综述
+最开始的博客用的是oschina, 自我感觉小清新，支持比较多风格的编辑器，容易编辑程度比csdn的要好。后来因为csdn人气的关系，又转到csdn，不过csdn编辑确实比较虐心，再后来就在服务器上搭一个WordPress的博客，不过用起来不是很爽。几个月前支持Markdown编辑，这无疑给用github pages的用户一个福音，因为可以直接上传到自己的github博客上。">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="export CSDN blog to Markdown">
+<meta name="twitter:description" content="#一、综述
+最开始的博客用的是oschina, 自我感觉小清新，支持比较多风格的编辑器，容易编辑程度比csdn的要好。后来因为csdn人气的关系，又转到csdn，不过csdn编辑确实比较虐心，再后来就在服务器上搭一个WordPress的博客，不过用起来不是很爽。几个月前支持Markdown编辑，这无疑给用github pages的用户一个福音，因为可以直接上传到自己的github博客上。">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-CSDN2Markdown" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            export CSDN blog to Markdown
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/03/29/CSDN2Markdown/">
+            <time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/life/">life</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/CSDN/">CSDN</a>, <a class="tag-link" href="/tags/markdown/">markdown</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>#一、综述</p>
+<p>最开始的博客用的是oschina, 自我感觉小清新，支持比较多风格的编辑器，容易编辑程度比csdn的要好。后来因为csdn人气的关系，又转到csdn，不过csdn编辑确实比较虐心，再后来就在服务器上搭一个WordPress的博客，不过用起来不是很爽。几个月前支持Markdown编辑，这无疑给用github pages的用户一个福音，因为可以直接上传到自己的github博客上。<br><a id="more"></a><br>用github pages生成静态的页面，目前比较流行有Jekyll,Octopress,Hexo等，其他的我没怎么调查，jekyll是github推荐的，上面有他们给的官方框架、主题，支持网页书写Markdown文章。后两者需要编译后再上传，github上呈现出来的是html文件。总体而言，后两者的界面更好，用起来更加舒适。我用的是Hexo，命令简洁，不过要注意备份整个工程，不然后果不堪设想。</p>
+<p>#二、迁移CSDN原文档到github Pages</p>
+<p>###1、前文<br>虽然目前CSDN支持markdown，但以前的文章都是用xeditor编辑器写的，不能导出，所以调研了方法。<br>总体而言有两种方法，但好像没多少人采用，因为格式可能不好。<br>1.爬取页面，导出html，然后在放在hexo中，目录为/source/_post/，直接放html文件，然后设置layout：false，那么hexo会忽略对html的编译，在浏览时直接超链接到html文件<br>2.将html文件再用程序转换为markdown<br>3.直接用代码爬取页面然后生成markdown文件</p>
+<p>第1种方法可能会遇到html文件中格式不支持的情况，没得到解决；<br>第2种方法发现在线转换效果也不好，就寻求代码解决，github上有一段<a href="https://github.com/baizhebz/html2markdown4blog" target="_blank" rel="external">程序</a>，作者说可行，不过我环境没搭成功，不懂php，更何况要装curl（这个之前做android时NDK开发时也很难配置），后来用第3种方法就直接写python爬虫程序，参考github的一段<a href="https://github.com/kesalin/PythonSnippet/blob/master/ExportCSDNBlog.py" target="_blank" rel="external">程序</a>，不过程序有些问题，也有些不符合如今CSDN的布局，所以我大改了一下，转为markdown的那一部分程序脉络是差不多的，这个也是最关键的部分，直接影响到markdown的显示，不过我也做得不太好。</p>
+<p>###2、程序<br>所需安装库：<br>BeautifulSoup<br>根据版本不同可能要改动相应的代码，一般不用改。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#! /usr/bin/env python</span></div><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"><span class="keyword">import</span> logging</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> threading</div><div class="line"><span class="keyword">import</span> traceback</div><div class="line"><span class="keyword">import</span> time </div><div class="line"><span class="keyword">import</span> datetime</div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'gb18030'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># global variable</span></div><div class="line">blog = <span class="string">"http://blog.csdn.net"</span></div><div class="line">url = <span class="string">"http://blog.csdn.net/gugugujiawei?viewmode=contents"</span></div><div class="line">outputDir = <span class="string">'F:\\linux\\Share\\github\\article\\'</span></div><div class="line">gRetryCount = <span class="number">4</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">decodeHtmlSpecialCharacter</span><span class="params">(htmlStr)</span>:</span></div><div class="line">    specChars = &#123;<span class="string">"&amp;ensp;"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"&amp;emsp;"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"&amp;nbsp;"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"&amp;lt;"</span> : <span class="string">"&lt;"</span>, \</div><div class="line">                 <span class="string">"&amp;gt"</span> : <span class="string">"&gt;"</span>, \</div><div class="line">                 <span class="string">"&amp;amp;"</span> : <span class="string">"&amp;"</span>, \</div><div class="line">                 <span class="string">"&amp;quot;"</span> : <span class="string">"\""</span>, \</div><div class="line">                 <span class="string">"&amp;copy;"</span> : <span class="string">"®"</span>, \</div><div class="line">                 <span class="string">"&amp;times;"</span> : <span class="string">"×"</span>, \</div><div class="line">                 <span class="string">"&amp;divide;"</span> : <span class="string">"÷"</span>, \</div><div class="line">                 &#125;</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> specChars.keys():</div><div class="line">        htmlStr = htmlStr.replace(key, specChars[key])</div><div class="line">    <span class="keyword">return</span> htmlStr</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">repalceInvalidCharInFilename</span><span class="params">(filename)</span>:</span></div><div class="line">    specChars = &#123;<span class="string">"\\"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"/"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">":"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"*"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"?"</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"\""</span> : <span class="string">""</span>, \</div><div class="line">                 <span class="string">"&lt;"</span> : <span class="string">"小于"</span>, \</div><div class="line">                 <span class="string">"&gt;"</span> : <span class="string">"大于"</span>, \</div><div class="line">                 <span class="string">"|"</span> : <span class="string">" and "</span>, \</div><div class="line">                 <span class="string">"&amp;"</span> :<span class="string">" or "</span>, \</div><div class="line">                 &#125;</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> specChars.keys():</div><div class="line">        filename = filename.replace(key, specChars[key])</div><div class="line">    <span class="keyword">return</span> filename</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getPageUrlList</span><span class="params">(url)</span>:</span></div><div class="line">    </div><div class="line">    <span class="keyword">global</span> blog</div><div class="line">    </div><div class="line">    <span class="comment">#获取所有的页面的 url</span></div><div class="line">    user_agent = <span class="string">'Mozilla/4.0 (compatible;  MSIE 5.5; Windows NT)'</span>  </div><div class="line">    header = &#123; <span class="string">'User-Agent'</span> : user_agent &#125; </div><div class="line"></div><div class="line">    request = urllib2.Request(url, <span class="keyword">None</span>, header)</div><div class="line">    response = urllib2.urlopen(request)</div><div class="line">    data = response.read()</div><div class="line"></div><div class="line">    <span class="comment">#print data</span></div><div class="line">    soup = BeautifulSoup(data)</div><div class="line">    pageListDocs = soup.find_all(id=<span class="string">"article_list"</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># artclie----&#123;url:title&#125;</span></div><div class="line">    articleUrlTitle = &#123;&#125;</div><div class="line">    </div><div class="line">    <span class="comment">#print len(pageListDocs)</span></div><div class="line">    </div><div class="line">    <span class="keyword">for</span> pageList <span class="keyword">in</span> pageListDocs:</div><div class="line">        </div><div class="line">        h1List = pageList.find_all(<span class="string">'h1'</span>)</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> articleList <span class="keyword">in</span> h1List:            </div><div class="line">        </div><div class="line">            hrefDocs = articleList.find_all(<span class="string">"a"</span>)</div><div class="line">        </div><div class="line">        </div><div class="line">            <span class="keyword">if</span> len(hrefDocs) &gt; <span class="number">0</span>:</div><div class="line">                articleHrefDoc = hrefDocs[<span class="number">0</span>]                            </div><div class="line">                </div><div class="line">                <span class="comment">#print "hello",articleHrefDoc</span></div><div class="line">                articleUrl =  blog + articleHrefDoc[<span class="string">"href"</span>]</div><div class="line">                articleTitle = articleHrefDoc.text</div><div class="line">                articleUrlTitle[articleUrl] = articleTitle</div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'the count of articles is'</span>,len(articleUrlTitle)</div><div class="line">    <span class="string">'''</span></div><div class="line">    for s in articleUrlTitle:</div><div class="line">        print s,'--',articleUrlTitle[s]</div><div class="line">    '''</div><div class="line">    <span class="keyword">return</span> articleUrlTitle</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">download</span><span class="params">(url, title)</span>:</span></div><div class="line">    <span class="comment"># 下载文章，并保存为 markdown 格式</span></div><div class="line">    logging.info(<span class="string">" &gt;&gt; download: "</span> + url)</div><div class="line">    <span class="keyword">print</span> <span class="string">'downloading the article'</span>,title</div><div class="line"></div><div class="line">    data = <span class="keyword">None</span></div><div class="line">    title = <span class="string">'"'</span> + title + <span class="string">'"'</span></div><div class="line">    categories = <span class="string">""</span></div><div class="line">    content = <span class="string">""</span></div><div class="line">    <span class="comment">#postDate = datetime.datetime.now()</span></div><div class="line"></div><div class="line">    <span class="keyword">global</span> gRetryCount</div><div class="line">    count = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">        <span class="keyword">if</span> count &gt;= gRetryCount:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        count = count + <span class="number">1</span></div><div class="line">        <span class="keyword">try</span>:            </div><div class="line">            time.sleep(<span class="number">2.0</span>) <span class="comment">#访问太快会不响应</span></div><div class="line">            user_agent = <span class="string">'Mozilla/4.0 (compatible;  MSIE 5.5; Windows NT)'</span>  </div><div class="line">            header = &#123; <span class="string">'User-Agent'</span> : user_agent &#125;    </div><div class="line">            request = urllib2.Request(url, <span class="keyword">None</span>, header)</div><div class="line">            response = urllib2.urlopen(request)            </div><div class="line">            data = response.read()</div><div class="line">            <span class="keyword">break</span></div><div class="line">        <span class="keyword">except</span> Exception,e:</div><div class="line">            exstr = traceback.format_exc()</div><div class="line">            logging.info(<span class="string">" &gt;&gt; failed to download "</span> + url + <span class="string">", retry: "</span> + str(count) + <span class="string">", error:"</span> + exstr)</div><div class="line">            <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span> data == <span class="keyword">None</span>:</div><div class="line">        logging.info(<span class="string">" &gt;&gt; failed to download "</span> + url)</div><div class="line">        <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="comment">#print data</span></div><div class="line">    </div><div class="line">    soup = BeautifulSoup(data)</div><div class="line"></div><div class="line">    <span class="comment">#date=link_postdate</span></div><div class="line"></div><div class="line"></div><div class="line">    manageDocs = soup.find_all(<span class="string">"div"</span>, <span class="string">"article_manage"</span>)</div><div class="line">    <span class="keyword">for</span> managerDoc <span class="keyword">in</span> manageDocs:</div><div class="line">        categoryDoc = managerDoc.find_all(<span class="string">"span"</span>, <span class="string">"link_categories"</span>)</div><div class="line">        <span class="keyword">if</span> len(categoryDoc) &gt; <span class="number">0</span>:                            </div><div class="line">            categories = categoryDoc[<span class="number">0</span>].a.get_text().encode(<span class="string">'UTF-8'</span>).strip()</div><div class="line">            categories  = categories.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gb2312'</span>)            </div><div class="line"></div><div class="line">        postDateDoc = managerDoc.find_all(<span class="string">"span"</span>, <span class="string">"link_postdate"</span>)</div><div class="line">        <span class="keyword">if</span> len(postDateDoc) &gt; <span class="number">0</span>:</div><div class="line">            postDateStr = postDateDoc[<span class="number">0</span>].string.encode(<span class="string">'UTF-8'</span>).strip()</div><div class="line">            postDate = datetime.datetime.strptime(postDateStr, <span class="string">'%Y-%m-%d %H:%M'</span>)</div><div class="line">            <span class="keyword">print</span> <span class="string">'date'</span>,postDate</div><div class="line"></div><div class="line">    contentDocs = soup.find_all(id=<span class="string">"article_content"</span>)</div><div class="line">    <span class="keyword">for</span> contentDoc <span class="keyword">in</span> contentDocs:</div><div class="line">        htmlContent = contentDoc.prettify().encode(<span class="string">'UTF-8'</span>)</div><div class="line">        <span class="comment">#print htmlContent</span></div><div class="line">        <span class="comment">#file = open('F:\\linux\\Share\\github\\out2.txt','a+')</span></div><div class="line">        <span class="comment">#file.write(htmlContent)        </span></div><div class="line">        content = htmlContent2String(htmlContent)</div><div class="line">        </div><div class="line">    exportToMarkdown(outputDir, postDate, categories, title, content)</div><div class="line"></div><div class="line"><span class="comment"># htmlContent2String 是整个程序的关键，用于将html转换为markdown格式</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">htmlContent2String</span><span class="params">(contentStr)</span>:</span></div><div class="line">    </div><div class="line">    <span class="comment"># 因为格式中可能会有点乱，换行符乱入，所以用[\s\S]匹配任何字符，包括换行符，注意其中的？是为了去除贪婪匹配</span></div><div class="line">    <span class="comment"># &lt;img src="http://img.blog.csdn.net/20150118194525562" align="middle" width="400 height="300" alt=""&gt; </span></div><div class="line">    <span class="comment"># 图片链接   </span></div><div class="line">    patternImg = re.compile(<span class="string">r'(&lt;img[\s\S]+?src=")([\s\S]+?)("[\s\S]+?&gt;)'</span>)    </div><div class="line">    </div><div class="line">    <span class="comment"># &lt;a target="_blank" href="http://blog.csdn.net/gugugujiawei/article/details/42558411"&gt;博文&lt;/a&gt;</span></div><div class="line">    <span class="comment"># 文字链接</span></div><div class="line">    patternHref = re.compile(<span class="string">r'(&lt;a[\s\S]+?href=")([\s\S]*?)("[\s\S]*?&gt;)([\s\S]+?)(&lt;/a&gt;)'</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># 去除html各种标签，这里的？则是指匹配0次或1次</span></div><div class="line">    patternRemoveHtml = re.compile(<span class="string">r'&lt;/?[^&gt;]+&gt;'</span>)</div><div class="line"></div><div class="line">    resultContent = patternImg.sub(<span class="string">r'![image_mark](\2)'</span>, contentStr)</div><div class="line">    resultContent = patternHref.sub(<span class="string">r'[\4](\2)'</span>, resultContent)</div><div class="line">    resultContent = re.sub(patternRemoveHtml, <span class="string">r''</span>, resultContent)</div><div class="line">    resultContent = decodeHtmlSpecialCharacter(resultContent)</div><div class="line">    </div><div class="line">    <span class="comment">#file = open('F:\\linux\\Share\\github\\out3.txt','a+')</span></div><div class="line">    <span class="comment">#file.write(resultContent)</span></div><div class="line">        </div><div class="line">    <span class="keyword">return</span> resultContent</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">exportToMarkdown</span><span class="params">(exportDir, postdate, categories, title, content)</span>:</span></div><div class="line">    titleDate = postdate.strftime(<span class="string">'%Y-%m'</span>)</div><div class="line">    contentDate = postdate.strftime(<span class="string">'%Y-%m-%d %H:%M:%S %z'</span>)</div><div class="line">    filename = title</div><div class="line">    filename = repalceInvalidCharInFilename(filename)</div><div class="line">    filepath = exportDir + filename + <span class="string">'.txt'</span></div><div class="line"></div><div class="line">    <span class="comment">#newFile = open(unicode(filepath, "utf8"), 'w') </span></div><div class="line">    newFile = open(filepath,<span class="string">'a+'</span>)</div><div class="line">    </div><div class="line">    <span class="comment"># 根据自己需要选择去留注释,这里categores和tag用了一样的</span></div><div class="line">    </div><div class="line">    <span class="comment"># newFile.write('---' + '\n')</span></div><div class="line">    <span class="comment"># newFile.write('layout: post' + '\n')    </span></div><div class="line">    newFile.write(<span class="string">'title: '</span> + title + <span class="string">'\n'</span>)</div><div class="line">    newFile.write(<span class="string">'date: '</span> + contentDate + <span class="string">'\n'</span>)</div><div class="line">    <span class="comment"># newFile.write('comments: true' + '\n')</span></div><div class="line">    newFile.write(<span class="string">'categories: ['</span> + categories + <span class="string">']'</span> + <span class="string">'\n'</span>)</div><div class="line">    newFile.write(<span class="string">'tags: ['</span> + categories + <span class="string">']'</span> + <span class="string">'\n'</span>)</div><div class="line">    </div><div class="line">    <span class="comment">#newFile.write('description:' + title + '\n')</span></div><div class="line">    <span class="comment"># newFile.write('keywords: ' + categories + '\n')</span></div><div class="line">    </div><div class="line">    newFile.write(<span class="string">'---'</span> + <span class="string">'\n\n'</span>)</div><div class="line">    </div><div class="line">    </div><div class="line">    content = content.decode(<span class="string">'utf-8'</span>).encode(<span class="string">'gb18030'</span>)</div><div class="line">    <span class="comment">#print content</span></div><div class="line">    newFile.write(content)</div><div class="line">    newFile.write(<span class="string">'\n'</span>)</div><div class="line">    newFile.close()</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    </div><div class="line">    <span class="keyword">global</span> url    </div><div class="line">    articleUrlTitle = getPageUrlList(url)</div><div class="line">    </div><div class="line">    <span class="string">'''</span></div><div class="line">    for s in articleUrlTitle:</div><div class="line">        print s,'--',articleUrlTitle[s]</div><div class="line">    '''</div><div class="line">    </div><div class="line">    <span class="comment">#multithread download</span></div><div class="line">    threads = []</div><div class="line">    <span class="keyword">for</span> url <span class="keyword">in</span> articleUrlTitle:</div><div class="line">        patternTitle = re.compile(<span class="string">'\r\n *(.+) *\r\n'</span>)</div><div class="line">        title = patternTitle.sub(<span class="string">r'\1'</span>,articleUrlTitle[url])</div><div class="line">        <span class="comment"># print 'title',title</span></div><div class="line">        t = threading.Thread(target = download,args = (url,title))    </div><div class="line">        t.start()</div><div class="line">        threads.append(t)</div><div class="line">        </div><div class="line">            </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> threads:</div><div class="line">        i.join()</div><div class="line">    </div><div class="line">    <span class="keyword">print</span> <span class="string">"success"</span></div></pre></td></tr></table></figure></p>
+<p>注意一下，我是直接在windows下运行生成的txt文件，所以文件时dos文件，当在linux下编辑的话会出现各种因格式问题导致的奇怪的问题，这需要自己改一下编码。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2015/03/29/CSDN2Markdown/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2015/03/29/CSDN2Markdown/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/04/21/网络搜索引擎简介/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    网络搜索引擎简介
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2015/03/26/myphoto/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">photos</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2015/03/29/CSDN2Markdown/" data-title="export CSDN blog to Markdown" data-url="https://enjoyhot.github.io/2015/03/29/CSDN2Markdown/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

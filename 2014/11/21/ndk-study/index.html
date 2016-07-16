@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>androidNDK开发之JNI学习         | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="androidNDK开发之JNI学习
+1、在工程目录下编译1javah -classpath F:\eclipse\adt-bundle-windows-x86-201309017\sdk\platforms\android-19\android.jar;bin/classes com.example.jnithread.MainActivity">
+<meta property="og:type" content="article">
+<meta property="og:title" content="androidNDK开发之JNI学习        ">
+<meta property="og:url" content="https://enjoyhot.github.io/2014/11/21/ndk-study/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="androidNDK开发之JNI学习
+1、在工程目录下编译1javah -classpath F:\eclipse\adt-bundle-windows-x86-201309017\sdk\platforms\android-19\android.jar;bin/classes com.example.jnithread.MainActivity">
+<meta property="og:image" content="http://static.oschina.net/uploads/space/2014/0804/205406_O7S4_262922.png">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="androidNDK开发之JNI学习        ">
+<meta name="twitter:description" content="androidNDK开发之JNI学习
+1、在工程目录下编译1javah -classpath F:\eclipse\adt-bundle-windows-x86-201309017\sdk\platforms\android-19\android.jar;bin/classes com.example.jnithread.MainActivity">
+<meta name="twitter:image" content="http://static.oschina.net/uploads/space/2014/0804/205406_O7S4_262922.png">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-ndk-study" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            androidNDK开发之JNI学习        
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/11/21/ndk-study/">
+            <time datetime="2014-11-21T10:30:00.000Z" itemprop="datePublished">2014-11-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ndk/">ndk</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p> androidNDK开发之JNI学习</p>
+<h2 id="1、在工程目录下编译"><a href="#1、在工程目录下编译" class="headerlink" title="1、在工程目录下编译"></a>1、在工程目录下编译</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">javah -classpath F:\eclipse\adt-bundle-windows-x86<span class="number">-201309017</span>\sdk\platforms\android<span class="number">-19</span>\android.jar;bin/classes com.example.jnithread.MainActivity</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="2、增加log信息的方法"><a href="#2、增加log信息的方法" class="headerlink" title="2、增加log信息的方法"></a>2、增加log信息的方法</h2><p>   在.c文件中添加<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG_TAG <span class="meta-string">"System.out.cpp"</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)</span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)</span></div></pre></td></tr></table></figure></p>
+<p>   在配置mk文件增加<br>   <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#liblog.so libGLESv2.so</span></div><div class="line"></div><div class="line">LOCAL_LDLIBS += -llog</div></pre></td></tr></table></figure></p>
+<p>  e.g<br>  <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LOGD(<span class="string">"x=%d"</span>,x);</div></pre></td></tr></table></figure></p>
+<h2 id="3、类型转换"><a href="#3、类型转换" class="headerlink" title="3、类型转换"></a>3、类型转换</h2><p>   <img src="http://static.oschina.net/uploads/space/2014/0804/205406_O7S4_262922.png" alt="image_mark"></p>
+<h2 id="4、对象传递机制"><a href="#4、对象传递机制" class="headerlink" title="4、对象传递机制"></a>4、对象传递机制</h2><p> 假如类为c/c++类，并开始在c/c++程序建立：</p>
+<p>返回对象以jlong 类型强制转换对象的指针值，从而将c/c++的对象返回到java中以long变量保存起来，以便后续工作回调c/c++中的对象。</p>
+<p>e.g<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">dataInCpp * data1=<span class="keyword">new</span> dataIntCpp();</div><div class="line"></div><div class="line"><span class="keyword">return</span> (jlong)data1;</div><div class="line"></div><div class="line"><span class="comment">////////////////////////////////////////</span></div><div class="line"></div><div class="line">jlong data1;</div><div class="line"></div><div class="line">dataInCpp * data2 = (dataInCpp *)data1;</div></pre></td></tr></table></figure></p>
+<p>假如类为java类，通过c/c++程序创建</p>
+<p>A、在c++中创建并返回给java程序<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Jclass clazz = env-&gt;FindClass(“com/example/jnithread/myData”);</div><div class="line"></div><div class="line">If(!clazz)&#123;</div><div class="line"></div><div class="line"><span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">jmethodID constr = env-&gt;GetMethodID(clazz,”&lt;init&gt;”,”()V”);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(!constr)&#123;</div><div class="line"></div><div class="line"><span class="keyword">return</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">jobject newObj = env-&gt;NewObject(clazz,constr);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(!newObj)&#123;</div><div class="line"></div><div class="line"><span class="keyword">return</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> newObj;</div></pre></td></tr></table></figure></p>
+<p>在java程序中直接用类型myData接收即可，无需用Object</p>
+<p>B、将c++中创建的java对象再传回给c++方法<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jclass clazz = env-&gt;GetObjectClass(dataObject);</div></pre></td></tr></table></figure></p>
+<p>接下来和调用java类中函数一样如下所述</p>
+<h2 id="5、简单说明一下c-调用java函数："><a href="#5、简单说明一下c-调用java函数：" class="headerlink" title="5、简单说明一下c++调用java函数："></a>5、简单说明一下c++调用java函数：</h2><p>非静态方法调用<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">jclass dpclazz = env-&gt;FindClass(”com/example/jnithreads/MainActivity”);</div><div class="line"></div><div class="line"><span class="keyword">if</span>(dpclazz==<span class="number">0</span>)&#123;</div><div class="line"></div><div class="line">LOGI(“find <span class="keyword">class</span> error”);</div><div class="line"></div><div class="line"><span class="keyword">return</span>;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//去得到函数的信息 javap –s com.example.jnithreads.MainActivity</span></div><div class="line"></div><div class="line">jmethod method1 = env-&gt;GetMethodID(dpclazz,”getNum”,(参数)V);  </div><div class="line"></div><div class="line"><span class="comment">//获取非静态方法的ID</span></div><div class="line"></div><div class="line"><span class="comment">//V代表返回类型为void,也可(II)I,表示接收两个int方法返回int类型</span></div><div class="line"></div><div class="line"><span class="comment">//如果是String类型的参数写为(Ljava/lang/String;),如果返回类型为byte数组则写为[B</span></div><div class="line"></div><div class="line">  If(method1==<span class="number">0</span>)&#123;</div><div class="line"></div><div class="line">LOGI(“find method1 error”);</div><div class="line"></div><div class="line">Return;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">env-&gt;CallVoidMethod(obj,method1);<span class="comment">//Void表示返回类型为void</span></div><div class="line"></div><div class="line"><span class="comment">//int result = env-&gt;CallVoidMethod(obj,method1,3,5); 后面为参数</span></div></pre></td></tr></table></figure></p>
+<p>注：</p>
+<p>1/返回类型定义</p>
+<p>2/如果要调用类似【”hello”.getBytes(“gb2312”);】则需要<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env-&gt;CallVoidMethod(obj,”hello”,method1,”gb2312”);<span class="comment">//”~”要先转换为jstring</span></div></pre></td></tr></table></figure></p>
+<p>3/ byteArray-&gt;char *<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">jsize len = env-&gt;GetArrayLength(byteArray);</div><div class="line">jbyte* ba = env-&gt;GetByteArrayElements(byteArray,JNI_FALSE);</div><div class="line"><span class="keyword">if</span>(len&gt;<span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">char</span> * rtn = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(len+<span class="number">1</span>);</div><div class="line">    <span class="built_in">memcpy</span>(rtn,ba,len);</div><div class="line">    rth[len]=<span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">env-&gt;ReleaseByteArrayElements(byteArray,ba,<span class="number">0</span>);<span class="comment">//释放掉内存空间</span></div><div class="line"><span class="keyword">return</span> rtn;</div></pre></td></tr></table></figure></p>
+<p>4/获取java对象的ID为:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jfieldID field_a=env-&gt;GetFieldID(dpclazz,”a”,”I”);</div><div class="line"><span class="keyword">int</span> ma=(<span class="keyword">int</span>)env-&gt;GetObjectField(obj,field_a);<span class="comment">//调用以获得值</span></div></pre></td></tr></table></figure></p>
+<p>静态方法调用：</p>
+<p>获取非静态方法的ID：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jmethod methodID = env-&gt;GetStaticMethodID(dpclazz,”getNum”,(参数)V);</div></pre></td></tr></table></figure></p>
+<p>调用静态方法：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env-&gt;CallStaticVoidMethod(dpclazz,mthodID,参数)</div></pre></td></tr></table></figure></p>
+<p>熟记：get 参数 clazz   call参数 obj,methodID </p>
+<p>如果是static的话，call前面obj改为clazz</p>
+<h2 id="6、全局变量"><a href="#6、全局变量" class="headerlink" title="6、全局变量"></a>6、全局变量</h2><p>  Jobject的子类别包括jclass、jstring,、jarray(这些类称为局部性的对象参考)，他们就算定义成static，也要利用函数：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gObj = env-&gt;NewGlobalRef(obj);将其赋值从而保持全局性</div></pre></td></tr></table></figure></p>
+<h2 id="7、JNI线程模式的调用"><a href="#7、JNI线程模式的调用" class="headerlink" title="7、JNI线程模式的调用"></a>7、JNI线程模式的调用</h2><h2 id="8、利用C-回调来更新UI-Handler"><a href="#8、利用C-回调来更新UI-Handler" class="headerlink" title="8、利用C++回调来更新UI(Handler)"></a>8、利用C++回调来更新UI(Handler)</h2><p> 同步锁：(java调用c++)</p>
+<p>1、定义的时候：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> native synchronized String <span class="title">execute</span><span class="params">(Object oSync)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>进入函数资源调用时：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env-&gt;MonitorEnter(syncObj);</div></pre></td></tr></table></figure></p>
+<p>释放时：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">env-&gt;MonitorExit(syncObj);</div></pre></td></tr></table></figure></p>
+<p>上面讲的是不同线程情况下将对象传入C++程序，所以还是与线程安全有关</p>
+<p>如果是在c++程序中的多线程，也一样。</p>
+<p>多线程注意：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="number">0</span> == gVm-&gt;AttachCurrentThread(&amp;env, <span class="literal">NULL</span>))</div><div class="line">&#123;</div><div class="line">gVm-&gt;DetachCurrentThread();</div><div class="line">……</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2014/11/21/ndk-study/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2014/11/21/ndk-study/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/11/21/android-reflect/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    android混淆与反射
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/11/21/android-listview/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">android利用ListView滑动刷新        </div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2014/11/21/ndk-study/" data-title="androidNDK开发之JNI学习        " data-url="https://enjoyhot.github.io/2014/11/21/ndk-study/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>android利用ListView滑动刷新         | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="滑动刷新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android利用ListView滑动刷新        ">
+<meta property="og:url" content="https://enjoyhot.github.io/2014/11/21/android-listview/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="滑动刷新">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.682Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android利用ListView滑动刷新        ">
+<meta name="twitter:description" content="滑动刷新">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-android-listview" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            android利用ListView滑动刷新        
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/11/21/android-listview/">
+            <time datetime="2014-11-21T10:28:00.000Z" itemprop="datePublished">2014-11-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/listview/">listview</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>  滑动刷新<br><a id="more"></a> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.laohuai.appdemo.customui;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> java.util.ArrayList;  </div><div class="line"><span class="keyword">import</span> java.util.List;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> com.laohuai.appdemo.customui.ui.MyListView;  </div><div class="line"><span class="keyword">import</span> com.laohuai.appdemo.customui.ui.MyListView.OnRefreshListener;  </div><div class="line"><span class="keyword">import</span> android.app.Activity;  </div><div class="line"><span class="keyword">import</span> android.os.AsyncTask;  </div><div class="line"><span class="keyword">import</span> android.os.Bundle;  </div><div class="line"><span class="keyword">import</span> android.view.View;  </div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;  </div><div class="line"><span class="keyword">import</span> android.widget.BaseAdapter;  </div><div class="line"><span class="keyword">import</span> android.widget.TextView;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> List&lt;String&gt; data;  </div><div class="line">    <span class="keyword">private</span> BaseAdapter adapter;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </div><div class="line">        setContentView(R.layout.main);  </div><div class="line">  </div><div class="line">        data = <span class="keyword">new</span> ArrayList&lt;String&gt;();  </div><div class="line">        data.add(<span class="string">"a"</span>);  </div><div class="line">        data.add(<span class="string">"b"</span>);  </div><div class="line">        data.add(<span class="string">"c"</span>);  </div><div class="line">        data.add(<span class="string">"a"</span>);  </div><div class="line">        data.add(<span class="string">"b"</span>);  </div><div class="line">              </div><div class="line">          </div><div class="line">        <span class="keyword">final</span> MyListView listView = (MyListView) findViewById(R.id.listView);  </div><div class="line">        adapter = <span class="keyword">new</span> BaseAdapter() &#123;  </div><div class="line">            <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;  </div><div class="line">                TextView tv = <span class="keyword">new</span> TextView(getApplicationContext());  </div><div class="line">                tv.setText(data.get(position));  </div><div class="line">                <span class="keyword">return</span> tv;  </div><div class="line">            &#125;  </div><div class="line">  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;  </div><div class="line">                <span class="keyword">return</span> <span class="number">0</span>;  </div><div class="line">            &#125;  </div><div class="line">  </div><div class="line">            <span class="function"><span class="keyword">public</span> Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;  </div><div class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">            &#125;  </div><div class="line">  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;  </div><div class="line">                <span class="keyword">return</span> data.size();  </div><div class="line">            &#125;  </div><div class="line">        &#125;;  </div><div class="line">        listView.setAdapter(adapter);  </div><div class="line">  </div><div class="line">        listView.setonRefreshListener(<span class="keyword">new</span> OnRefreshListener() &#123;  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRefresh</span><span class="params">()</span> </span>&#123;  </div><div class="line">                <span class="keyword">new</span> AsyncTask&lt;Void, Void, Void&gt;() &#123;  </div><div class="line">                    <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(Void... params)</span> </span>&#123;  </div><div class="line">                        <span class="keyword">try</span> &#123;  </div><div class="line">                            Thread.sleep(<span class="number">3000</span>);<span class="comment">//刷新3秒  </span></div><div class="line">                        &#125; <span class="keyword">catch</span> (Exception e) &#123;  </div><div class="line">                            e.printStackTrace();  </div><div class="line">                        &#125;  </div><div class="line">                        data.add(<span class="string">"刷新后添加的内容"</span>);  </div><div class="line">                        <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">                    &#125;  </div><div class="line">  </div><div class="line">                    <span class="meta">@Override</span>  </div><div class="line">                    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(Void result)</span> </span>&#123;  </div><div class="line">                        adapter.notifyDataSetChanged();  </div><div class="line">                        listView.onRefreshComplete();  </div><div class="line">                    &#125;  </div><div class="line">  </div><div class="line">                &#125;.execute(<span class="keyword">null</span>,<span class="keyword">null</span>,<span class="keyword">null</span>);  </div><div class="line">            &#125;  </div><div class="line">        &#125;);  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.laohuai.appdemo.customui.ui;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> java.util.Date;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> com.laohuai.appdemo.customui.R;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> android.content.Context;  </div><div class="line"><span class="keyword">import</span> android.util.AttributeSet;  </div><div class="line"><span class="keyword">import</span> android.util.Log;  </div><div class="line"><span class="keyword">import</span> android.view.LayoutInflater;  </div><div class="line"><span class="keyword">import</span> android.view.MotionEvent;  </div><div class="line"><span class="keyword">import</span> android.view.View;  </div><div class="line"><span class="keyword">import</span> android.view.ViewGroup;  </div><div class="line"><span class="keyword">import</span> android.view.animation.LinearInterpolator;  </div><div class="line"><span class="keyword">import</span> android.view.animation.RotateAnimation;  </div><div class="line"><span class="keyword">import</span> android.widget.AbsListView;  </div><div class="line"><span class="keyword">import</span> android.widget.BaseAdapter;  </div><div class="line"><span class="keyword">import</span> android.widget.ImageView;  </div><div class="line"><span class="keyword">import</span> android.widget.LinearLayout;  </div><div class="line"><span class="keyword">import</span> android.widget.ListView;  </div><div class="line"><span class="keyword">import</span> android.widget.AbsListView.OnScrollListener;  </div><div class="line"><span class="keyword">import</span> android.widget.ProgressBar;  </div><div class="line"><span class="keyword">import</span> android.widget.TextView;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyListView</span> <span class="keyword">extends</span> <span class="title">ListView</span> <span class="keyword">implements</span> <span class="title">OnScrollListener</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"listview"</span>;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> RELEASE_To_REFRESH = <span class="number">0</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> PULL_To_REFRESH = <span class="number">1</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> REFRESHING = <span class="number">2</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> DONE = <span class="number">3</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> LOADING = <span class="number">4</span>;  </div><div class="line">  </div><div class="line">    <span class="comment">// 实际的padding的距离与界面上偏移距离的比例  </span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> RATIO = <span class="number">3</span>;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> LayoutInflater inflater;  </div><div class="line">  </div><div class="line">    <span class="comment">//一个线性布局类对象，设置一个可选布局区域  </span></div><div class="line">    <span class="keyword">private</span> LinearLayout headView;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> TextView tipsTextview;  </div><div class="line">    <span class="keyword">private</span> TextView lastUpdatedTextView;  </div><div class="line">    <span class="keyword">private</span> ImageView arrowImageView;  </div><div class="line">    <span class="keyword">private</span> ProgressBar progressBar;  </div><div class="line">  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> RotateAnimation animation;  </div><div class="line">    <span class="keyword">private</span> RotateAnimation reverseAnimation;  </div><div class="line">  </div><div class="line">    <span class="comment">// 用于保证startY的值在一个完整的touch事件中只被记录一次  </span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isRecored;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> headContentWidth;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> headContentHeight;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> startY;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> firstItemIndex;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> state;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isBack;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> OnRefreshListener refreshListener;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isRefreshable;  </div><div class="line">  </div><div class="line">    <span class="comment">//新建时自动调用构造函数  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyListView</span><span class="params">(Context context)</span> </span>&#123;  </div><div class="line">        <span class="keyword">super</span>(context);  </div><div class="line">        init(context);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="comment">//新建时自动调用构造函数  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyListView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;  </div><div class="line">        <span class="keyword">super</span>(context, attrs);  </div><div class="line">        init(context);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(Context context)</span> </span>&#123;  </div><div class="line">        <span class="comment">//拖动时背景黑色设置  </span></div><div class="line">        setCacheColorHint(context.getResources().getColor(R.color.transparent));  </div><div class="line">          </div><div class="line">        <span class="comment">//---------设置项目前面的显示---------  </span></div><div class="line">        inflater = LayoutInflater.from(context);  </div><div class="line">        headView = (LinearLayout) inflater.inflate(R.layout.head, <span class="keyword">null</span>);  </div><div class="line">        <span class="comment">//获取箭头对象  </span></div><div class="line">        arrowImageView = (ImageView) headView  </div><div class="line">                .findViewById(R.id.head_arrowImageView);  </div><div class="line">        arrowImageView.setMinimumWidth(<span class="number">70</span>);  </div><div class="line">        arrowImageView.setMinimumHeight(<span class="number">50</span>);  </div><div class="line">          </div><div class="line">        <span class="comment">//进度条  </span></div><div class="line">        progressBar = (ProgressBar) headView  </div><div class="line">                .findViewById(R.id.head_progressBar);  </div><div class="line">        <span class="comment">//下拉刷新、上拉刷新  </span></div><div class="line">        tipsTextview = (TextView) headView.findViewById(R.id.head_tipsTextView);  </div><div class="line">        <span class="comment">//最近更新  </span></div><div class="line">        lastUpdatedTextView = (TextView) headView  </div><div class="line">                .findViewById(R.id.head_lastUpdatedTextView);         </div><div class="line">        measureView(headView);  </div><div class="line">        headContentHeight = headView.getMeasuredHeight();  </div><div class="line">        headContentWidth = headView.getMeasuredWidth();  </div><div class="line">  </div><div class="line">        <span class="comment">//和父类比较，（上下左右）的view之间的距离  </span></div><div class="line">        headView.setPadding(<span class="number">0</span>, -<span class="number">1</span> * headContentHeight, <span class="number">0</span>, <span class="number">0</span>);  </div><div class="line">        headView.invalidate();  </div><div class="line">  </div><div class="line">        Log.v(<span class="string">"size"</span>, <span class="string">"width:"</span> + headContentWidth + <span class="string">" height:"</span>  </div><div class="line">                + headContentHeight);  </div><div class="line">  </div><div class="line">        <span class="comment">//下面两句极其重要，一方面将listView和headView绑定，一方面监听操作  </span></div><div class="line">        addHeaderView(headView, <span class="keyword">null</span>, <span class="keyword">false</span>);  </div><div class="line">        setOnScrollListener(<span class="keyword">this</span>);  </div><div class="line">  </div><div class="line">        <span class="comment">//下面没看懂，待查  </span></div><div class="line">        animation = <span class="keyword">new</span> RotateAnimation(<span class="number">0</span>, -<span class="number">180</span>,  </div><div class="line">                RotateAnimation.RELATIVE_TO_SELF, <span class="number">0.5f</span>,  </div><div class="line">                RotateAnimation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);  </div><div class="line">        animation.setInterpolator(<span class="keyword">new</span> LinearInterpolator());  </div><div class="line">        animation.setDuration(<span class="number">250</span>);  </div><div class="line">        animation.setFillAfter(<span class="keyword">true</span>);  </div><div class="line">  </div><div class="line">        reverseAnimation = <span class="keyword">new</span> RotateAnimation(-<span class="number">180</span>, <span class="number">0</span>,  </div><div class="line">                RotateAnimation.RELATIVE_TO_SELF, <span class="number">0.5f</span>,  </div><div class="line">                RotateAnimation.RELATIVE_TO_SELF, <span class="number">0.5f</span>);  </div><div class="line">        reverseAnimation.setInterpolator(<span class="keyword">new</span> LinearInterpolator());  </div><div class="line">        reverseAnimation.setDuration(<span class="number">200</span>);  </div><div class="line">        reverseAnimation.setFillAfter(<span class="keyword">true</span>);  </div><div class="line">  </div><div class="line">        state = DONE;  </div><div class="line">        isRefreshable = <span class="keyword">false</span>;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScroll</span><span class="params">(AbsListView arg0, <span class="keyword">int</span> firstVisiableItem, <span class="keyword">int</span> arg2,  </span></span></div><div class="line">            <span class="keyword">int</span> arg3) &#123;  </div><div class="line">        <span class="comment">//滚动时一直回调，直到停止滚动时才停止回调。单击时不回调。刷新     </span></div><div class="line">        <span class="comment">//onTouchEvent调用后总会回调一次  </span></div><div class="line">        <span class="comment">//firstVisibleItem：当前能看见的第一个列表项ID（从0开始），总是0      </span></div><div class="line">        <span class="comment">//arg2：当前能看见的列表项个数（小半个也算）listView个数      </span></div><div class="line">        <span class="comment">//arg3：列表项共数,listView个数  </span></div><div class="line">        <span class="comment">//Log.d(TAG,"firstItemIndex:"+firstItemIndex);  </span></div><div class="line">        firstItemIndex = firstVisiableItem;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="comment">//点击或滑动都会触发  </span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(AbsListView arg0, <span class="keyword">int</span> arg1)</span> </span>&#123;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;  </div><div class="line">  </div><div class="line">        <span class="keyword">if</span> (isRefreshable) &#123;  </div><div class="line">            <span class="keyword">switch</span> (event.getAction()) &#123;  </div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_DOWN:  </div><div class="line">                <span class="keyword">if</span> (firstItemIndex == <span class="number">0</span> &amp;&amp; !isRecored) &#123;  </div><div class="line">                    isRecored = <span class="keyword">true</span>;  </div><div class="line">                    startY = (<span class="keyword">int</span>) event.getY();  </div><div class="line">                    Log.v(TAG, <span class="string">"在down时候记录当前位置‘"</span>);  </div><div class="line">                &#125;  </div><div class="line">                <span class="keyword">break</span>;  </div><div class="line">  </div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_UP:  </div><div class="line">  </div><div class="line">                <span class="keyword">if</span> (state != REFRESHING &amp;&amp; state != LOADING) &#123;  </div><div class="line">                    <span class="keyword">if</span> (state == DONE) &#123;  </div><div class="line">                        <span class="comment">// 什么都不做  </span></div><div class="line">                    &#125;  </div><div class="line">                    <span class="keyword">if</span> (state == PULL_To_REFRESH) &#123;  </div><div class="line">                        state = DONE;  </div><div class="line">                        changeHeaderViewByState();  </div><div class="line">                        <span class="comment">//有下拉但没刷新  </span></div><div class="line">                        Log.v(TAG, <span class="string">"由下拉刷新状态，到done状态"</span>);  </div><div class="line">                    &#125;  </div><div class="line">                    <span class="keyword">if</span> (state == RELEASE_To_REFRESH) &#123;  </div><div class="line">                        state = REFRESHING;  </div><div class="line">                        <span class="comment">//因为异步执行，所以下面两句一起进行，由onRefresh决定什么时候改变状态，  </span></div><div class="line">                        <span class="comment">//因为会调用onRefreshComplete()  </span></div><div class="line">                        changeHeaderViewByState();  </div><div class="line">                        onRefresh();  </div><div class="line">                        <span class="comment">//有下拉并且刷新  </span></div><div class="line">                        Log.v(TAG, <span class="string">"由松开刷新状态，到done状态"</span>);  </div><div class="line">                    &#125;  </div><div class="line">                &#125;  </div><div class="line">  </div><div class="line">                isRecored = <span class="keyword">false</span>;  </div><div class="line">                isBack = <span class="keyword">false</span>;  </div><div class="line">  </div><div class="line">                <span class="keyword">break</span>;  </div><div class="line">  </div><div class="line">            <span class="comment">//当触摸时移动操作时调用  </span></div><div class="line">            <span class="keyword">case</span> MotionEvent.ACTION_MOVE:  </div><div class="line">                <span class="keyword">int</span> tempY = (<span class="keyword">int</span>) event.getY();  </div><div class="line">  </div><div class="line">                <span class="keyword">if</span> (!isRecored &amp;&amp; firstItemIndex == <span class="number">0</span>) &#123;  </div><div class="line">                    Log.v(TAG, <span class="string">"在move时候记录下位置"</span>);  </div><div class="line">                    isRecored = <span class="keyword">true</span>;  </div><div class="line">                    startY = tempY;  </div><div class="line">                &#125;  </div><div class="line">  </div><div class="line">                <span class="keyword">if</span> (state != REFRESHING &amp;&amp; isRecored &amp;&amp; state != LOADING) &#123;  </div><div class="line">  </div><div class="line">                    <span class="comment">// 保证在设置padding的过程中，当前的位置一直是在head，否则如果当列表超出屏幕的话，当在上推的时候，列表会同时进行滚动  </span></div><div class="line">  </div><div class="line">                    <span class="comment">// 可以松手去刷新了  </span></div><div class="line">                    <span class="keyword">if</span> (state == RELEASE_To_REFRESH) &#123;  </div><div class="line">  </div><div class="line">                        setSelection(<span class="number">0</span>);  </div><div class="line">  </div><div class="line">                        <span class="comment">// 往上推了，推到了屏幕足够掩盖head的程度，但是还没有推到全部掩盖的地步  </span></div><div class="line">                        <span class="keyword">if</span> (((tempY - startY) / RATIO &lt; headContentHeight)  </div><div class="line">                                &amp;&amp; (tempY - startY) &gt; <span class="number">0</span>) &#123;  </div><div class="line">                            state = PULL_To_REFRESH;  </div><div class="line">                            changeHeaderViewByState();  </div><div class="line">  </div><div class="line">                            Log.v(TAG, <span class="string">"由松开刷新状态转变到下拉刷新状态"</span>);  </div><div class="line">                        &#125;  </div><div class="line">                        <span class="comment">// 一下子推到顶了  </span></div><div class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (tempY - startY &lt;= <span class="number">0</span>) &#123;  </div><div class="line">                            state = DONE;  </div><div class="line">                            changeHeaderViewByState();  </div><div class="line">  </div><div class="line">                            Log.v(TAG, <span class="string">"由松开刷新状态转变到done状态"</span>);  </div><div class="line">                        &#125;  </div><div class="line">                        <span class="comment">// 往下拉了，或者还没有上推到屏幕顶部掩盖head的地步  </span></div><div class="line">                        <span class="keyword">else</span> &#123;  </div><div class="line">                            <span class="comment">// 不用进行特别的操作，只用更新paddingTop的值就行了  </span></div><div class="line">                        &#125;  </div><div class="line">                    &#125;  </div><div class="line">                    <span class="comment">// 还没有到达显示松开刷新的时候,DONE或者是PULL_To_REFRESH状态  </span></div><div class="line">                    <span class="keyword">if</span> (state == PULL_To_REFRESH) &#123;  </div><div class="line">  </div><div class="line">                        setSelection(<span class="number">0</span>);  </div><div class="line">  </div><div class="line">                        <span class="comment">// 下拉到可以进入RELEASE_TO_REFRESH的状态  </span></div><div class="line">                        <span class="keyword">if</span> ((tempY - startY) / RATIO &gt;= headContentHeight) &#123;  </div><div class="line">                            state = RELEASE_To_REFRESH;  </div><div class="line">                            isBack = <span class="keyword">true</span>;  </div><div class="line">                            changeHeaderViewByState();  </div><div class="line">  </div><div class="line">                            Log.v(TAG, <span class="string">"由done或者下拉刷新状态转变到松开刷新"</span>);  </div><div class="line">                        &#125;  </div><div class="line">                        <span class="comment">// 上推到顶了  </span></div><div class="line">                        <span class="keyword">else</span> <span class="keyword">if</span> (tempY - startY &lt;= <span class="number">0</span>) &#123;  </div><div class="line">                            state = DONE;  </div><div class="line">                            changeHeaderViewByState();  </div><div class="line">  </div><div class="line">                            Log.v(TAG, <span class="string">"由DOne或者下拉刷新状态转变到done状态"</span>);  </div><div class="line">                        &#125;  </div><div class="line">                    &#125;  </div><div class="line">  </div><div class="line">                    <span class="comment">// done状态下  </span></div><div class="line">                    <span class="keyword">if</span> (state == DONE) &#123;  </div><div class="line">                        <span class="keyword">if</span> (tempY - startY &gt; <span class="number">0</span>) &#123;  </div><div class="line">                            state = PULL_To_REFRESH;  </div><div class="line">                            changeHeaderViewByState();  </div><div class="line">                        &#125;  </div><div class="line">                    &#125;  </div><div class="line">  </div><div class="line">                    <span class="comment">// 更新headView的size  </span></div><div class="line">                    <span class="keyword">if</span> (state == PULL_To_REFRESH) &#123;  </div><div class="line">                        headView.setPadding(<span class="number">0</span>, -<span class="number">1</span> * headContentHeight  </div><div class="line">                                + (tempY - startY) / RATIO, <span class="number">0</span>, <span class="number">0</span>);  </div><div class="line">  </div><div class="line">                    &#125;  </div><div class="line">  </div><div class="line">                    <span class="comment">// 更新headView的paddingTop  </span></div><div class="line">                    <span class="keyword">if</span> (state == RELEASE_To_REFRESH) &#123;  </div><div class="line">                        headView.setPadding(<span class="number">0</span>, (tempY - startY) / RATIO  </div><div class="line">                                - headContentHeight, <span class="number">0</span>, <span class="number">0</span>);  </div><div class="line">                    &#125;  </div><div class="line">  </div><div class="line">                &#125;  </div><div class="line">  </div><div class="line">                <span class="keyword">break</span>;  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="comment">// 当状态改变时候，调用该方法，以更新界面  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">changeHeaderViewByState</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">switch</span> (state) &#123;  </div><div class="line">        <span class="keyword">case</span> RELEASE_To_REFRESH:  </div><div class="line">            arrowImageView.setVisibility(View.VISIBLE);  </div><div class="line">            progressBar.setVisibility(View.GONE);  </div><div class="line">            tipsTextview.setVisibility(View.VISIBLE);  </div><div class="line">            lastUpdatedTextView.setVisibility(View.VISIBLE);  </div><div class="line">  </div><div class="line">            arrowImageView.clearAnimation();  </div><div class="line">            <span class="comment">//方向  </span></div><div class="line">            arrowImageView.startAnimation(animation);  </div><div class="line">  </div><div class="line">            tipsTextview.setText(<span class="string">"松开刷新"</span>);  </div><div class="line">  </div><div class="line">            Log.v(TAG, <span class="string">"当前状态，松开刷新"</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        <span class="keyword">case</span> PULL_To_REFRESH:  </div><div class="line">            progressBar.setVisibility(View.GONE);  </div><div class="line">            tipsTextview.setVisibility(View.VISIBLE);  </div><div class="line">            lastUpdatedTextView.setVisibility(View.VISIBLE);  </div><div class="line">            arrowImageView.clearAnimation();  </div><div class="line">            arrowImageView.setVisibility(View.VISIBLE);  </div><div class="line">            <span class="comment">// 是由RELEASE_To_REFRESH状态转变来的  </span></div><div class="line">            <span class="keyword">if</span> (isBack) &#123;  </div><div class="line">                isBack = <span class="keyword">false</span>;  </div><div class="line">                arrowImageView.clearAnimation();  </div><div class="line">                <span class="comment">//方向  </span></div><div class="line">                arrowImageView.startAnimation(reverseAnimation);  </div><div class="line">  </div><div class="line">                tipsTextview.setText(<span class="string">"下拉刷新"</span>);  </div><div class="line">            &#125; <span class="keyword">else</span> &#123;  </div><div class="line">                tipsTextview.setText(<span class="string">"下拉刷新"</span>);  </div><div class="line">            &#125;  </div><div class="line">            Log.v(TAG, <span class="string">"当前状态，下拉刷新"</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">  </div><div class="line">        <span class="keyword">case</span> REFRESHING:  </div><div class="line">  </div><div class="line">            headView.setPadding(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);  </div><div class="line">  </div><div class="line">            progressBar.setVisibility(View.VISIBLE);  </div><div class="line">            arrowImageView.clearAnimation();  </div><div class="line">            arrowImageView.setVisibility(View.GONE);  </div><div class="line">            tipsTextview.setText(<span class="string">"正在刷新..."</span>);  </div><div class="line">            lastUpdatedTextView.setVisibility(View.VISIBLE);  </div><div class="line">  </div><div class="line">            Log.v(TAG, <span class="string">"当前状态,正在刷新..."</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        <span class="keyword">case</span> DONE:  </div><div class="line">            headView.setPadding(<span class="number">0</span>, -<span class="number">1</span> * headContentHeight, <span class="number">0</span>, <span class="number">0</span>);  </div><div class="line">  </div><div class="line">            progressBar.setVisibility(View.GONE);  </div><div class="line">            arrowImageView.clearAnimation();  </div><div class="line">            arrowImageView.setImageResource(R.drawable.arrow);  </div><div class="line">            tipsTextview.setText(<span class="string">"下拉刷新"</span>);  </div><div class="line">            lastUpdatedTextView.setVisibility(View.VISIBLE);  </div><div class="line">  </div><div class="line">            Log.v(TAG, <span class="string">"当前状态，done"</span>);  </div><div class="line">            <span class="keyword">break</span>;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setonRefreshListener</span><span class="params">(OnRefreshListener refreshListener)</span> </span>&#123;  </div><div class="line">        <span class="keyword">this</span>.refreshListener = refreshListener;  </div><div class="line">        isRefreshable = <span class="keyword">true</span>;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">OnRefreshListener</span> </span>&#123;  </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRefresh</span><span class="params">()</span></span>;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onRefreshComplete</span><span class="params">()</span> </span>&#123;  </div><div class="line">        state = DONE;  </div><div class="line">        lastUpdatedTextView.setText(<span class="string">"最近更新:"</span> + <span class="keyword">new</span> Date().toLocaleString());  </div><div class="line">        changeHeaderViewByState();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">onRefresh</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="keyword">if</span> (refreshListener != <span class="keyword">null</span>) &#123;  </div><div class="line">            refreshListener.onRefresh();  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="comment">// 此方法直接照搬自网络上的一个下拉刷新的demo，此处是“估计”headView的width以及height  </span></div><div class="line">    <span class="comment">//1.static int getMode(int measureSpec):根据提供的测量值(格式)提取模式(上述三个模式之一)  </span></div><div class="line">    <span class="comment">//2.static int getSize(int measureSpec):根据提供的测量值(格式)提取大小值(这个大小也就是我们通常所说的大小)  </span></div><div class="line">    <span class="comment">//3.static int makeMeasureSpec(int size,int mode):根据提供的大小值和模式创建一个测量值(格式)  </span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">measureView</span><span class="params">(View child)</span> </span>&#123;  </div><div class="line">        ViewGroup.LayoutParams p = child.getLayoutParams();  </div><div class="line">        <span class="keyword">if</span> (p == <span class="keyword">null</span>) &#123;  </div><div class="line">            p = <span class="keyword">new</span> ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,  </div><div class="line">                    ViewGroup.LayoutParams.WRAP_CONTENT);  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">int</span> childWidthSpec = ViewGroup.getChildMeasureSpec(<span class="number">0</span>, <span class="number">0</span> + <span class="number">0</span>, p.width);  </div><div class="line">        <span class="keyword">int</span> lpHeight = p.height;  </div><div class="line">          </div><div class="line">        <span class="comment">//高度格式  </span></div><div class="line">        <span class="comment">//　一个MeasureSpec封装了父布局传递给子布局的布局要求  </span></div><div class="line">        <span class="keyword">int</span> childHeightSpec;  </div><div class="line">        <span class="keyword">if</span> (lpHeight &gt; <span class="number">0</span>) &#123;  </div><div class="line">            <span class="comment">//EXACTLY(完全)，父元素决定子元素的确切大小，子元素将被限定在给定的边界里而忽略它本身大小  </span></div><div class="line">            childHeightSpec = MeasureSpec.makeMeasureSpec(lpHeight,  </div><div class="line">                    MeasureSpec.EXACTLY);  </div><div class="line">            Log.d(TAG,<span class="string">"lpHeight:"</span>+ lpHeight);  </div><div class="line">        &#125; <span class="keyword">else</span> &#123;  </div><div class="line">            <span class="comment">//UNSPECIFIED(未指定),在高度上父元素不对子元素施加任何束缚  </span></div><div class="line">            childHeightSpec = MeasureSpec.makeMeasureSpec(<span class="number">0</span>,  </div><div class="line">                    MeasureSpec.UNSPECIFIED);  </div><div class="line">            <span class="comment">//测试的时候发现是-2  </span></div><div class="line">            Log.d(TAG,<span class="string">"lpHeight:"</span>+ lpHeight);  </div><div class="line">        &#125;  </div><div class="line">        <span class="comment">//宽度保持不变  </span></div><div class="line">        <span class="comment">//测试的时候childWidthSpec, childHeightSpec都是0  </span></div><div class="line">        child.measure(childWidthSpec, childHeightSpec);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAdapter</span><span class="params">(BaseAdapter adapter)</span> </span>&#123;  </div><div class="line">        lastUpdatedTextView.setText(<span class="string">"最近更新:"</span> + <span class="keyword">new</span> Date().toLocaleString());  </div><div class="line">        <span class="keyword">super</span>.setAdapter(adapter);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line">  </div><div class="line"><span class="comment">&lt;!-- ListView的头部 --&gt;</span>  </div><div class="line">  </div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span>  </span></div><div class="line">  <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>  </div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line"> &gt;  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 内容 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">RelativeLayout</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:id</span>=<span class="string">"@+id/head_contentLayout"</span>  </div><div class="line">  <span class="attr">android:paddingLeft</span>=<span class="string">"30dp"</span>  </div><div class="line">  &gt;  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 箭头图像、进度条 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">FrameLayout</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_alignParentLeft</span>=<span class="string">"true"</span>  </div><div class="line">  <span class="attr">android:layout_centerVertical</span>=<span class="string">"true"</span>  </div><div class="line">  &gt;  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 箭头 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">ImageView</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span>  </div><div class="line">  <span class="attr">android:src</span>=<span class="string">"@drawable/arrow"</span>  </div><div class="line">  <span class="attr">android:id</span>=<span class="string">"@+id/head_arrowImageView"</span>  </div><div class="line">  /&gt;  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 进度条 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">ProgressBar</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">style</span>=<span class="string">"?android:attr/progressBarStyleSmall"</span>  </div><div class="line">  <span class="attr">android:layout_gravity</span>=<span class="string">"center"</span>  </div><div class="line">  <span class="attr">android:id</span>=<span class="string">"@+id/head_progressBar"</span>  </div><div class="line">    </div><div class="line">  <span class="attr">android:visibility</span>=<span class="string">"gone"</span>  </div><div class="line">  /&gt;  </div><div class="line">    </div><div class="line">  <span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span>  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 提示、最近更新 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">LinearLayout</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_centerHorizontal</span>=<span class="string">"true"</span>  </div><div class="line">  <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>  </div><div class="line">  <span class="attr">android:gravity</span>=<span class="string">"center_horizontal"</span>  </div><div class="line">  &gt;  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 提示 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">TextView</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:text</span>=<span class="string">"下拉刷新"</span>  </div><div class="line">  <span class="attr">android:textColor</span>=<span class="string">"@color/white"</span>  </div><div class="line">  <span class="attr">android:textSize</span>=<span class="string">"20sp"</span>  </div><div class="line">  <span class="attr">android:id</span>=<span class="string">"@+id/head_tipsTextView"</span>  </div><div class="line">  /&gt;  </div><div class="line">    </div><div class="line">  <span class="comment">&lt;!-- 最近更新 --&gt;</span>  </div><div class="line">  <span class="tag">&lt;<span class="name">TextView</span>  </span></div><div class="line">  <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">  <span class="attr">android:id</span>=<span class="string">"@+id/head_lastUpdatedTextView"</span>  </div><div class="line">  <span class="attr">android:text</span>=<span class="string">"最近更新"</span>  </div><div class="line">  <span class="attr">android:textColor</span>=<span class="string">"@color/gold"</span>  </div><div class="line">  <span class="attr">android:textSize</span>=<span class="string">"10sp"</span>  </div><div class="line">  /&gt;  </div><div class="line">    </div><div class="line">  <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span>  </div><div class="line">    </div><div class="line">    </div><div class="line">  <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span>  </div><div class="line">    </div><div class="line">    </div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>  </span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:background</span>=<span class="string">"#000066"</span>  </div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span> &gt;  </div><div class="line">      </div><div class="line">    <span class="tag">&lt;<span class="name">com.laohuai.appdemo.customui.ui.MyListView</span>  </span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/listView"</span>  </div><div class="line">    /&gt;  </div><div class="line">      </div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2014/11/21/android-listview/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2014/11/21/android-listview/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/11/21/ndk-study/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    androidNDK开发之JNI学习        
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2014/11/21/django-csdn/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">关于django的几篇文章</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2014/11/21/android-listview/" data-title="android利用ListView滑动刷新        " data-url="https://enjoyhot.github.io/2014/11/21/android-listview/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

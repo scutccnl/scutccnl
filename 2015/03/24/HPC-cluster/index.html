@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>HPC集群平台搭建概念 | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="在本文之前，我建议先看完这篇文章：Linux高性能计算集群 – Beowulf集群　　
+#一、搭建集群中可能会遇到的问题
+1.集群设计/布局的一大难点就是网络，各家有各家的策略，一般围绕Beowulf变型。2.软件的部署缺乏实操调试，也不能断定这样部署是否成功以及是否优越。3.操作系统的选型以及安装系统、所需软件（包括集群管理工具、驱动软件、能耗监控软件等）的整个流程的手动/自动化部署。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HPC集群平台搭建概念">
+<meta property="og:url" content="https://enjoyhot.github.io/2015/03/24/HPC-cluster/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="在本文之前，我建议先看完这篇文章：Linux高性能计算集群 – Beowulf集群　　
+#一、搭建集群中可能会遇到的问题
+1.集群设计/布局的一大难点就是网络，各家有各家的策略，一般围绕Beowulf变型。2.软件的部署缺乏实操调试，也不能断定这样部署是否成功以及是否优越。3.操作系统的选型以及安装系统、所需软件（包括集群管理工具、驱动软件、能耗监控软件等）的整个流程的手动/自动化部署。">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324151225653">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324151208655">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324151438331">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324151858809">
+<meta property="og:image" content="http://img.blog.csdn.net/20150324154126054">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.694Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HPC集群平台搭建概念">
+<meta name="twitter:description" content="在本文之前，我建议先看完这篇文章：Linux高性能计算集群 – Beowulf集群　　
+#一、搭建集群中可能会遇到的问题
+1.集群设计/布局的一大难点就是网络，各家有各家的策略，一般围绕Beowulf变型。2.软件的部署缺乏实操调试，也不能断定这样部署是否成功以及是否优越。3.操作系统的选型以及安装系统、所需软件（包括集群管理工具、驱动软件、能耗监控软件等）的整个流程的手动/自动化部署。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150324151225653">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-HPC-cluster" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            HPC集群平台搭建概念
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/03/24/HPC-cluster/">
+            <time datetime="2015-03-24T12:23:50.000Z" itemprop="datePublished">2015-03-24</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/HPC/">HPC</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/cluster/">cluster</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>　　在本文之前，我建议先看完这篇文章：<a href="http://www.jointforce.com.cn/page/hardware_linux.html" target="_blank" rel="external">Linux高性能计算集群 – Beowulf集群</a>　　</p>
+<p>#一、搭建集群中可能会遇到的问题</p>
+<p>1.集群设计/布局的一大难点就是网络，各家有各家的策略，一般围绕Beowulf变型。<br>2.软件的部署缺乏实操调试，也不能断定这样部署是否成功以及是否优越。<br>3.操作系统的选型以及安装系统、所需软件（包括集群管理工具、驱动软件、能耗监控软件等）的整个流程的手动/自动化部署。<br><a id="more"></a><br>4.每个提供硬件的对应公司几乎都推出他们自己的集群管理软件，浪潮好像没有，在HPC方面浪潮好像没有相应的开发社区，DELL和IBM这些大公司都有。<br>5.能耗的衡量，具体的优化方向和策略。</p>
+<p>#二、HPC概览</p>
+<p>##①总体构成<br>    Outside Network: 外部网络<br>    Master Node: 主节点<br>    Compute Nodes: 计算节点<br>    Storage: 存储器<br>    Computational Network: 计算网络<br>    Management Network: 管理网络</p>
+<p>##②大多数 HPCC 系统配有两个网络</p>
+<ol>
+<li>基于TCP的管理网络</li>
+<li>计算网络，可以是基于 TCP 或其它协议的，通常是 InfiniBand 或 Myrinet 10G 之    类的高速网络<br>##③拓扑图<br>网上找的普遍认可的：<br><img src="http://img.blog.csdn.net/20150324151225653" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150324151208655" alt="这里写图片描述"></li>
+</ol>
+<hr>
+<p>这个是自己根据实际情况“臆想”的：<br><img src="http://img.blog.csdn.net/20150324151438331" alt="这里写图片描述"></p>
+<p>##④所需软件组件（按安装顺序）：</p>
+<p>###1、对于安装系统：<br>　　集群中的每个节点（HPCC 节点文章链接）、主节点、登录节点和计算节点都需要有操作系统。操作系统可以安装在节点的硬盘驱动器上，甚至可以安装在ramdisk 上，这有时被称为“无盘”或“无状态”节点。一般说来，主节点创建所谓的“映像”，然后将其发送到计算节点上进行安装（硬盘驱动器或 ramdisk 上）。<br>　　系统装在内存会更快，但断电后要采取将系统拷贝到硬盘的方法重新存储起来，比较麻烦。<br>　　<br>　　<strong>几种安装工具的特点：</strong><br>　　<img src="http://img.blog.csdn.net/20150324151858809" alt="这里写图片描述"></p>
+<p>　　但是，比较有名有Rocks（比xCat安装简单）、xCat。<br>　　<strong>xCAT:</strong><br>a、支持自己系统独立，可以自己选择基于RHEL的最新版本系统；<br>b、命令行安装，需要人工编辑配置文件，安装一台之后再利用脚本进行网络安装裸机节点；<br>c、xCat在安装起来像一个个独立软件，如其他并行计算需要的相关软件可以通过xCat命令安装；<br>　　<strong>Rocks:</strong><br>a、ROCKS 基于 Red Hat 发行版，这对于大多数人是合适的，但是对于使用 SUSE 或者希望使用在 RH 6.2 发行版上创建的映像的人就不合适了，里面的软件可以选择性安装。另外，ROCKS 不是克隆解决方案；<br>b、之前需刻录CD，GUI界面部署，之后人工进行节点命名和节点ip的配置，安装时一台一台进行；<br>c、Rocks则像一个集成的包，包含工具与软件；<br>Rocks = CentOS + Rolls<br>Roll软件包包括：</p>
+<ul>
+<li>base：基本的Rocks Cluster管理工具</li>
+<li>SGE：SUN Grid Engine，集群下作业调度</li>
+<li>HPC：为集群上的并行应用提供运行环境（MPI，PVM）</li>
+<li>area51：分析集群上文件和内核的完整性</li>
+<li>Ganglia：集群监控软件（主流hpc cluster基本都有这个）</li>
+<li>Bio：集群的生物信息学工具</li>
+</ul>
+<p>一般而言，这两种方法只有适用性与便捷性的差异。<br>有一个视频课程 <a href="http://edu.51cto.com/course/course_id-507.html" target="_blank" rel="external">http://edu.51cto.com/course/course_id-507.html</a></p>
+<p>　　对于操作系统的选择，调研了很多，一般用Red Hat，Centos居多，一方面是社区活跃，一方面是源码开发，资源兼容较多。<br>（MIC开发上基本采用Red Hat，Centos，SUSE，windows也开始有了）</p>
+<p>###2、安装驱动和开发工具。<br>包括IB驱动、编译器、编辑器、调试器、库等。</p>
+<p><strong>并行计算开发环境：</strong></p>
+<ul>
+<li>安装英特尔众核平台软件堆栈(MPSS)，包含各种驱动。<br><a href="https://software.intel.com/en-us/articles/intel-manycore-platform-software-stack-mpss#lx34rel" target="_blank" rel="external">https://software.intel.com/en-us/articles/intel-manycore-platform-software-stack-mpss#lx34rel</a></li>
+<li>假如用intel的编译器的话（我们应该是用intel的）：<br>下载安装intel parallel studio xe 2015，包含有性能分析工具、编译器、高性能库、并行编程工具等，对Xeon Phi进行相应的优化和升级。 Cilk Plus，OpenMP，TBB多线程编程技术和向量化技术在Xeon &amp; Xeon Phi上都已实现了，软件开发者无需额外的移植成本。（试用30天）<br><a href="https://software.intel.com/en-us/intel-parallel-studio-xe/try-buy" target="_blank" rel="external">https://software.intel.com/en-us/intel-parallel-studio-xe/try-buy</a></li>
+<li>xeon phi与第三方工具是否available，参考Intel FAQ：<br><a href="https://software.intel.com/en-us/articles/intel-and-third-party-tools-and-libraries-available-with-support-for-intelr-xeon-phitm" target="_blank" rel="external">https://software.intel.com/en-us/articles/intel-and-third-party-tools-and-libraries-available-with-support-for-intelr-xeon-phitm</a></li>
+</ul>
+<p>###3、配置节点信息存储系统<br>安装NFS、PVFS、Lustre 、Luster、GPFS、SNFS等，一般大型的HPC集群用Lustre能获得更好的性能，但不太适合小集群，小集群可以考虑用NFS和PVFS，但NFS并不是面向并行计算的，推荐用PVFS好一点。</p>
+<p><strong>关于Lustre：</strong><br>　　一个Lustre文件系统主要包括以下四个组件：管理服务器Management Server(mgs), 元数据服务器Meta Data Target(mdt), 对象存储服务器Object Storge Target(ost) ,客户端Lustre clients(lc)。<br>　　它主要包括三个部分：元数据服务器MDS (Metadata Server)、对象存储服务器OSS (Object Storage Server)和客户端Client。<br>　　正常的启动顺序是：OST -&gt; MDS -&gt; CLIENT</p>
+<p>　　甲骨文产品管理负责人Bob Thome表示：“云文件系统并不是甲骨文首个基于集群文件系统的产品。甲骨文管理着Lustre项目，Lustre更适合于拥有上千台服务器的大规模HPC（高性能计算）部署。云文件系统则更适合于25个节点数左右的小规模部署，尽管Lustre已经通过了多达100个节点的测试。Lustre也可以实现很多相同的功能，但使用门槛较高，安装和配置较为繁琐，并不适合于小规模部署。”<br>　　关于Lustre的博文：<a href="http://www.cnblogs.com/jpa2/category/384788.html" target="_blank" rel="external">http://www.cnblogs.com/jpa2/category/384788.html</a></p>
+<p><strong>PVFS存在以下不足：</strong><br>1）单一管理节点。上面说到过PVFS中只有一个管理节点来管理元数据，当集群系统达到一定的规模之后，管理节点将可能出现过度繁忙的情况，这时管理节点将成为系统瓶颈。<br>2）对数据的存储缺乏容错机制。当某一I/O节点无法工作时，上面的数据将出现不可用的情况。<br>3）静态配置。对PVFS的配置只能在启动前进行，一旦系统运行则不可再更改原先的配置。</p>
+<p>###4、集群管理工具（考虑是否集成了一些组件）<br>　　集群管理工具 (CMT)，它的职能是管理集群。它有多个功能，有的是可选功能。而必须具备的功能包括:</p>
+<ul>
+<li>维护计算节点清单（即集群中包括的节点）。只需通过简单如 /etc/hosts 的，就能复制或通过本地 DNS 发送至每个计算节点</li>
+<li>创建、管理映像或安装在计算节点上的数据包集</li>
+<li>发送映像或数据包到计算节点（一般通过 PXE ）</li>
+<li>执行对计算节点的基本监控（例如，节点工作情况？什么节点发生起落？）</li>
+<li>计算节点电源控制（不是硬性要求，但是强烈推荐）。即远程开启/关闭节点，此功能可以通过各种方法实现，有的方法需要使用增加其他硬件。</li>
+</ul>
+<p>虽然这个功能清单对于有集群经验的人来说显得太简短，但清单所载功能是 CMT真正的核心。具备其他功能也不错，但对集群来说并不是必不可少的。</p>
+<p>　　CMT 包括 Platform OCS、Clustercorp ROCKS+、Microsoft Windows CCS 和平台管理器 (Platform Manager) 、Mon等。</p>
+<p>###5、可选组件：<br>　　集群所需的工具并不多，但有了这些就能实现集群的基本运行。不过，它只能满足 1 个用户或 2 至 3 个用户的需要，此外，要实现全面控制和掌握集群的运行情况。要安装一些可选组件，从技术上虽然是可选项，但是没有这些工具，集群就不具备生产能力。<br>有一些组件可以添加到 CMT 或 CMI 上层。一个有数年管理多个集群经验的人说的，强烈建议您郑重考虑使用以下附加组件：</p>
+<ul>
+<li>更加广泛的监控工具，包括集群状态图形视图，例如Ganglia（链接- <a href="http://ganglia.info/）、Cacti（链接" target="_blank" rel="external">http://ganglia.info/）、Cacti（链接</a> - <a href="http://www.cacti.net/）和" target="_blank" rel="external">http://www.cacti.net/）和</a> Nagios（链接 -<a href="http://www.nagios.org/" target="_blank" rel="external">http://www.nagios.org/</a>)</li>
+<li>报告工具，允许您创建关于集群运行情况的报告</li>
+<li>用户帐户管理工具（允许您在整个集群上创建用户帐号、允许用户设置密码，然后将其传播到集群的所有节点上，允许无密码登录节点，这对于运行 MPI 应用程序是必需的）</li>
+</ul>
+<p>另一个理论上可选，但值得强烈推荐的组件——任务调度器（也被称为资源管理器）任务调度器是一个允许用户提交执行任务、但不参与任务运行的排队系统。任务调度器把提交的任务排成队列，等到资源（即节点）可用时，就开始运行。任务调度器包括：Platform LSF、PBS-Pro 和 MOAB 等。</p>
+<p>###6、测试<br>略</p>
+<p>#三、参考链接：<br><a href="http://www.ibm.com/developerworks/cn/linux/l-cluster1/" target="_blank" rel="external">http://www.ibm.com/developerworks/cn/linux/l-cluster1/</a><br><a href="http://zh.community.dell.com/techcenter/w/techcenter_wiki/50" target="_blank" rel="external">http://zh.community.dell.com/techcenter/w/techcenter_wiki/50</a><br><a href="http://www.hpcblog.com.cn/" target="_blank" rel="external">http://www.hpcblog.com.cn/</a></p>
+<hr>
+<p><strong>附上一张高清MIC图：</strong></p>
+<hr>
+<p><img src="http://img.blog.csdn.net/20150324154126054" alt="这里写图片描述"></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2015/03/24/HPC-cluster/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2015/03/24/HPC-cluster/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2015/03/26/myphoto/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    photos
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2015/03/24/hpc-benchmark/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">HPC性能测试</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2015/03/24/HPC-cluster/" data-title="HPC集群平台搭建概念" data-url="https://enjoyhot.github.io/2015/03/24/HPC-cluster/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>通过欢迎度对网页排名 | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="声明：由于此次第一次使用动态加载的表达式，hexo对LaTex支持可能不太好，因此这里有些公式显示奇奇怪怪，排版比较好一点的参考csdn:博客链接,下次就直接上图片算了。免得这边不兼容。
+一、欢迎度历史1998年 Jon Kleinberg致力于HITS的万维网搜索引擎项目，其中的算法使用了万维网的超链接结构来改进搜索引擎所得的结果。
+同时，在离他很近的斯坦福大学里，两名博士生正在从事一项名为Pa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过欢迎度对网页排名">
+<meta property="og:url" content="https://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="声明：由于此次第一次使用动态加载的表达式，hexo对LaTex支持可能不太好，因此这里有些公式显示奇奇怪怪，排版比较好一点的参考csdn:博客链接,下次就直接上图片算了。免得这边不兼容。
+一、欢迎度历史1998年 Jon Kleinberg致力于HITS的万维网搜索引擎项目，其中的算法使用了万维网的超链接结构来改进搜索引擎所得的结果。
+同时，在离他很近的斯坦福大学里，两名博士生正在从事一项名为Pa">
+<meta property="og:image" content="http://img.blog.csdn.net/20150503151630774">
+<meta property="og:image" content="http://img.blog.csdn.net/20150503151736749">
+<meta property="og:image" content="http://img.blog.csdn.net/20150503151630774">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过欢迎度对网页排名">
+<meta name="twitter:description" content="声明：由于此次第一次使用动态加载的表达式，hexo对LaTex支持可能不太好，因此这里有些公式显示奇奇怪怪，排版比较好一点的参考csdn:博客链接,下次就直接上图片算了。免得这边不兼容。
+一、欢迎度历史1998年 Jon Kleinberg致力于HITS的万维网搜索引擎项目，其中的算法使用了万维网的超链接结构来改进搜索引擎所得的结果。
+同时，在离他很近的斯坦福大学里，两名博士生正在从事一项名为Pa">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150503151630774">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-通过欢迎度对网页排名" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            通过欢迎度对网页排名
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2015/05/03/通过欢迎度对网页排名/">
+            <time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/PageRank/">PageRank</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>声明：由于此次第一次使用动态加载的表达式，hexo对LaTex支持可能不太好，因此这里有些公式显示奇奇怪怪，排版比较好一点的参考csdn:<a href="http://blog.csdn.net/gugugujiawei/article/details/45459089" target="_blank" rel="external">博客链接</a>,下次就直接上图片算了。免得这边不兼容。</p>
+<h1 id="一、欢迎度历史"><a href="#一、欢迎度历史" class="headerlink" title="一、欢迎度历史"></a>一、欢迎度历史</h1><p>1998年 Jon Kleinberg致力于HITS的万维网搜索引擎项目，其中的算法使用了万维网的超链接结构来改进搜索引擎所得的结果。</p>
+<p>同时，在离他很近的斯坦福大学里，两名博士生正在从事一项名为PageRank的类似项目，分别是Sergey Brin和Larry Page。<br><a id="more"></a><br>这两个模型之间的联系令人吃惊。然而，Jon并未试图将HITS发展成为一家公司，不过后来企业家们却试着去做了，并因此而赋予了HITS那迟到的商业成功。搜索引擎Teoma的技术基础就是HITS算法的一个扩展。</p>
+<p>在介绍之前，我们先将万维网的超链接结构形成一个巨大的有向图，有向链接分为岀链和入链。</p>
+<p>网络有向图<br><img src="http://img.blog.csdn.net/20150503151630774" alt="网络有向图"></p>
+<h2 id="1-1-PageRank"><a href="#1-1-PageRank" class="headerlink" title="1.1 PageRank"></a>1.1 PageRank</h2><p>Pagerank的论点是，如果一个网页被其他重要的页面所指向，那它就是重要的。值得注意的是，推荐者的地位对推荐的作用是有一定联系的，也与推荐者推荐的总数有所关联。</p>
+<h2 id="1-2-HITS"><a href="#1-2-HITS" class="headerlink" title="1.2 HITS"></a>1.2 HITS</h2><p>HITS定义了枢纽（hub）和权威（authority），这是网页的属性，当然一个网页可以两者都是。<br><img src="http://img.blog.csdn.net/20150503151736749" alt="这里写图片描述"><br>论点是，如果一个页面指向好的权威网页，那它就是一个好的枢纽网页（从而配上一个高的枢纽评分）；而如果一个网页被好的枢纽网页所指向，那它就是一个好的权威网页。</p>
+<h2 id="1-3-查询相关性"><a href="#1-3-查询相关性" class="headerlink" title="1.3 查询相关性"></a>1.3 查询相关性</h2><p>如果每个页面的欢迎度评分是离线确定的，并且对于无论哪个查询而言（直至下次更新前）均保持恒定，则排名称为查询无关的<br>PageRank是查询无关的，HITS的原始版本是查询相关的。它们二者都可以修改为相反的那个类型。</p>
+<h1 id="二、谷歌的PageRank数学"><a href="#二、谷歌的PageRank数学" class="headerlink" title="二、谷歌的PageRank数学"></a>二、谷歌的PageRank数学</h1><h2 id="2-1-求和公式"><a href="#2-1-求和公式" class="headerlink" title="2.1 求和公式"></a>2.1 求和公式</h2><p>某个页面的Pi的PageRank记为r(Pi)，它是所有指向Pi的页面的PageRank之和。<br>$$ r(P<em>i) =\sum</em>{P<em>j \in B</em>{P_i}} \dfrac{r(P_j)}{|P<em>j|} $$<br>Bpi为指向Pi的页面集合，|Pj|是由Pj发出的岀链数量。<br>通过迭代的方式，解决通过未知页面的PageRank值得出另外未知页面的PageRank值。为了定义这一迭代过程，我们引入更多的记号，令$r</em>{k+1}(P<em>i)$表示为页面Pi在第k+1次循环时的PageRank，则<br>$$ r</em>{k+1}(P<em>i) =\sum</em>{P<em>j \in B</em>{P_i}} \dfrac{r_k(P_j)}{|P<em>j|}(1) $$<br>将所有页面Pi均具有$r</em>{0}(P_i) =1/n$开始，并一直重复下去，直至收敛到稳定值。</p>
+<h2 id="2-2求和方程的矩阵表示"><a href="#2-2求和方程的矩阵表示" class="headerlink" title="2.2求和方程的矩阵表示"></a>2.2求和方程的矩阵表示</h2><p>打个比方，以下面这个图为例<br><img src="http://img.blog.csdn.net/20150503151630774" alt="网络有向图"><br>我们引入一个n x n阶的矩阵H和一个1 x n阶的行向量$\pi^T$。矩阵H是一个行归一化超链接矩阵，则上图相应H为：<br>$$ H= \begin{matrix} \pmatrix{ 0 &amp; 1/2 &amp; 1/2 &amp; 0 &amp; 0 &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \ 1/3 &amp; 1/3 &amp; 0 &amp; 0 &amp; 1/3 &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1/2 &amp; 1/2 \ 0 &amp; 0 &amp; 0 &amp; 1/2 &amp; 0 &amp; 1/2 \ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \} \end{matrix} $$<br>向引入行向量$\pi^{(k)T}$，它表示在第k次循环时的PageRank向量。则(1)式可表示为：<br>$$\pi^{(k+1)T}=\pi^{(k)T}H (2)$$<br>从这个H矩阵可以看出一些端倪，书中总结出4个，我觉得关键在于在计算中通过矩阵计算降低复杂度，这在现实中是个稀疏矩阵，复杂度对于理论来说由平方降为1次。</p>
+<h2 id="2-3迭代过程问题"><a href="#2-3迭代过程问题" class="headerlink" title="2.3迭代过程问题"></a>2.3迭代过程问题</h2><p>是否会收敛？收敛到唯一向量吗？是否与初始向量有关？收敛时间？</p>
+<p>以下分析为两位Google创始人解决的迭代问题。</p>
+<p>布林和佩奇最初利用$\pi^{(0)T}=1/ne^T$来开始迭代过程，但这可能导致排名下沉(rank sink)，譬如出现多个0，可比性降低，排名下沉很大程度上与悬挂节点（岀链为0）的出现有关。</p>
+<p>为了解决这个问题，他们使用了随机上网者的概念，对H矩阵进行调整，随机上网者特点为：</p>
+<ul>
+<li>随机岀链，包括悬挂节点</li>
+<li>随机上网者在某个特定页面上所停留的时间比例便是该页面相对重要性的一个度量</li>
+</ul>
+<p>于是，我们将H矩阵变为随机矩阵S：<br>$$ S= \begin{matrix} \pmatrix{ 0 &amp; 1/2 &amp; 1/2 &amp; 0 &amp; 0 &amp; 0 \ 1/6 &amp; 1/6 &amp; 1/6 &amp; 1/6 &amp; 1/6 &amp; 1/6 \ 1/3 &amp; 1/3 &amp; 0 &amp; 0 &amp; 1/3 &amp; 0 \ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1/2 &amp; 1/2 \ 0 &amp; 0 &amp; 0 &amp; 1/2 &amp; 0 &amp; 1/2 \ 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \} \end{matrix} $$<br>可以证明，S是由H的一个秩一修正所给出的，即$S=H + a(1/n e^T)$，其中，若页面i为悬挂结点则ai=1，否则为0。二值向量a为悬挂结点向量，为列向量。</p>
+<p>然而，仅靠这一点还不够，未能达成存在唯一的正向量$\pi^T$ ,且方程能很快地收敛到$\pi^T$。要做到这一点，布林和佩奇做了另外一个调整，所谓的素性调整。<strong>有了这个调整，所得的矩阵就是随机的并且是素的。一个素矩阵是不可约的并且非周期的，因此，链的稳态向量存在且唯一</strong>。</p>
+<p>转换为素矩阵是基于这样一个论述的。上网者有时会在浏览器URL地址栏输入一个新的目的地，为了对这个行为进行数学建模，布林和佩奇创造了一个新的矩阵G如下：</p>
+<p>$$ G=\alpha S + (1-\alpha)1/n ee^T$$</p>
+<p>式中，a是一个0到1的标量(在之后的章节会反复提到a在谷歌中取0.85)，表示随机上网者根据万维网的超链接结构进行浏览的时间百分比。G成为<strong>谷歌矩阵</strong>，$E=1/n ee^T$可称为跳转矩阵，是均匀分布的，即在进行跳转时是公平跳转。</p>
+<p>在书中，分为6点简单概括G带来的后果：</p>
+<ul>
+<li>G是随机的。</li>
+<li>G是不可约的。</li>
+<li>G是非周期的，Gii&gt;0导致。</li>
+<li>G是素的。</li>
+<li>G是完全稠密的。从计算的角度，这是很糟糕的。但G可以写为非常稀疏的超链接矩阵H的秩一修正。</li>
+</ul>
+<p>\begin{align}<br>G &amp;=\alpha S + (1-\alpha)1/n ee^T \<br>&amp; =\alpha (H + a(1/n e^T)) + (1-\alpha)1/n ee^T \<br>&amp; =\alpha H+[\alpha(a)+(1-\alpha)e]1/ne^T<br>\end{align}</p>
+<p>因此，谷歌修正后的PageRank法为<br>$$\pi^{（k+1）T}=\pi^{（k）T}G$$</p>
+<h2 id="2-4-PageRank向量的计算"><a href="#2-4-PageRank向量的计算" class="headerlink" title="2.4 PageRank向量的计算"></a>2.4 PageRank向量的计算</h2><p>将求解$\pi^T$转换为如下特征向量问题<br>$$\pi^T=\pi^TG \<br>    \pi^Te=1$$<br>将求解$\pi^T$转换为求解如下的性齐次系统：<br>$$\pi^T(E-G)=0^T \<br>    \pi^Te=1$$<br>第一个系统为找到对应于主特征值$\lambda_1=1$的G的归一化主左特征向量。在第二个系统中，目标则是找到E-G的归一化左零向量。两个系统均服从归一化方程$\pi^Te=1$，该方程确保$\pi^T$是一个概率向量。</p>
+<h3 id="2-4-1-幂法计算"><a href="#2-4-1-幂法计算" class="headerlink" title="2.4.1 幂法计算"></a>2.4.1 幂法计算</h3><p>PageRank矩阵G的特点使得幂法成为了显而易见的最佳选择。幂法是求取矩阵主特征值和特征向量的最古老同时也是最简单的迭代方法之一。缺点的计算速度缓慢。<br>\begin{align} \pi^{（k+1）T} &amp; =\pi^{（k）T}G \ &amp; =\alpha S + (1-\alpha)1/n \pi^{（k）T} ee^T \ &amp; =\alpha (H + a(1/n e^T)) + (1-\alpha)1/n ee^T \ &amp; =\alpha \pi^{（k）T} H+[\alpha \pi^{（k）T} a+1-\alpha]e^T/n \end{align}<br>式中，向量-矩阵乘法$\alpha \pi^{（k）T} H$执行于H这个极端稀疏的矩阵之上，而S和G从来就没有被实际生成或存储过，每个向量-矩阵乘法的复杂度为O(n)，因为H的每一行有差不多10个非零元素，这就是使用幂法的主要原因。<br>这里还有几个优点：</p>
+<ul>
+<li>幂法中矩阵系数仅通过向量-矩阵乘法运算的程序来进行访问，而没有实际对矩阵加以操作。</li>
+<li>幂法存储方面，除了稀疏矩阵H和悬挂结点向量a之外，就只需要保存\alpha \pi^{（k）T}$了，这个向量是完全稠密的。</li>
+<li>迭代次数仅需50~100次。</li>
+</ul>
+<p>为什么仅需50次呢，解释一下，在马尔科夫链理论中给出了答案，一般而言，应用于某个矩阵的幂法的渐进收敛速率依赖于绝对值最大的两个特征值$\lambda_1$和$\lambda<em>2$的比值。确切来说，渐进收敛速率就是$ |\lambda</em>/\lambda_1|^k \to 0 $的速率。</p>
+<p>对于G这样的随机矩阵，$\lambda_1=1$，由于G也是素的，因此$|\lambda_2|&lt;1$。</p>
+<p>通过一些理论的支撑，有以下关系：<br>$$\lambda_k=\alpha \mu_k$$<br>其中$\mu_k&lt;=1$</p>
+<p>在万维网结构中，$\mu_k$约等于1，因此，$|\mu_2(G)| \approx \alpha$。</p>
+<p>因此，渐进收敛速率在50次的情况为：<br>$$\alpha ^{50}=0.85^{50} \approx 0.000296$$<br>即在第50次迭代时，可以期望近似PageRank向量的精度大约为小数点后2~3位。这个精度已经足够了，当然要真正区分需要小数点后10位精度，但是当PageRank评分和内容评分结合起来之后，高精度就变得不那么重要了。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/07/08/Stacking/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Stacking
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2015/04/21/网络搜索引擎简介/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">网络搜索引擎简介</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2015/05/03/通过欢迎度对网页排名/" data-title="通过欢迎度对网页排名" data-url="https://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

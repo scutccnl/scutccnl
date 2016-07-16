@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>利用简易Tomcat服务器结合MysqL实现Android手机注册与登录(客户端部分)         | ENJOYHOT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一、概述1、服务器在本地搭建，利用Tomcat运行servlet容器2、继承于httpServlet类的自定义实现与客户端的交互，结合MysqL，jdbc知识3、客户端实现简单的注册和登录验证">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用简易Tomcat服务器结合MysqL实现Android手机注册与登录(客户端部分)        ">
+<meta property="og:url" content="https://enjoyhot.github.io/2014/11/21/tomcat-client/index.html">
+<meta property="og:site_name" content="ENJOYHOT">
+<meta property="og:description" content="一、概述1、服务器在本地搭建，利用Tomcat运行servlet容器2、继承于httpServlet类的自定义实现与客户端的交互，结合MysqL，jdbc知识3、客户端实现简单的注册和登录验证">
+<meta property="og:updated_time" content="2016-07-16T06:35:11.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用简易Tomcat服务器结合MysqL实现Android手机注册与登录(客户端部分)        ">
+<meta name="twitter:description" content="一、概述1、服务器在本地搭建，利用Tomcat运行servlet容器2、继承于httpServlet类的自定义实现与客户端的交互，结合MysqL，jdbc知识3、客户端实现简单的注册和登录验证">
+<link rel="publisher" href="111736291216286617217">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/fancybox/jquery.fancybox.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?715efc417137bb8b58f6b4edfa378ccd";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+</head>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">ENJOYHOT</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">ENJOYHOT</h2>
+            <h3 id="title">D</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span>
+            <a id="follow" target="_blank" href="https://github.com/enjoyhot/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                33
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                27
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/enjoyhot" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="http://weibo.com/gugugujiawei" target="_blank" title="weibo" class=tooltip>
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:gugugujiawei@gmail.com" target="_blank" title="envelope-o" class=tooltip>
+                            <i class="fa fa-envelope-o"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.douban.com/people/75493036/" target="_blank" title="douban" class=tooltip>
+                            <i class="fa fa-douban"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-tomcat-client" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            利用简易Tomcat服务器结合MysqL实现Android手机注册与登录(客户端部分)        
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2014/11/21/tomcat-client/">
+            <time datetime="2014-11-21T10:22:00.000Z" itemprop="datePublished">2014-11-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/android/">android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/servlet/">servlet</a>, <a class="tag-link" href="/tags/tomcat/">tomcat</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p>1、服务器在本地搭建，利用Tomcat运行servlet容器<br>2、继承于httpServlet类的自定义实现与客户端的交互，结合MysqL，jdbc知识<br>3、客户端实现简单的注册和登录验证<br><a id="more"></a><br>注意点：<br>1、web.xml里入口定义要正确，否则登录客户端连接不到<br>2、当在Tomcat中运行时，需要在WEB_INF文件夹中手动添加jdbc库文件，偶尔会在运行过后消失，要注意。（或者直接脱离Eclipse就不会有这个问题）<br>3、sql语句要多测试，否则容易写错但执行不会报错。<br>4、注意事先需启动MysqL。</p>
+<h1 id="二、代码"><a href="#二、代码" class="headerlink" title="二、代码"></a>二、代码</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example.java4androidmysql;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> java.io.IOException;  </div><div class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;  </div><div class="line"><span class="keyword">import</span> java.util.ArrayList;  </div><div class="line"><span class="keyword">import</span> java.util.List;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> org.apache.http.HttpResponse;  </div><div class="line"><span class="keyword">import</span> org.apache.http.HttpStatus;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.ClientProtocolException;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.HttpClient;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.entity.UrlEncodedFormEntity;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.methods.HttpPost;  </div><div class="line"><span class="keyword">import</span> org.apache.http.conn.params.ConnManagerParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.impl.client.DefaultHttpClient;  </div><div class="line"><span class="keyword">import</span> org.apache.http.message.BasicNameValuePair;  </div><div class="line"><span class="keyword">import</span> org.apache.http.params.BasicHttpParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.params.HttpConnectionParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.params.HttpParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.protocol.HTTP;  </div><div class="line"><span class="keyword">import</span> org.apache.http.util.EntityUtils;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> android.os.AsyncTask;  </div><div class="line"><span class="keyword">import</span> android.os.Bundle;  </div><div class="line"><span class="keyword">import</span> android.app.Activity;  </div><div class="line"><span class="keyword">import</span> android.content.Intent;  </div><div class="line"><span class="keyword">import</span> android.view.Menu;  </div><div class="line"><span class="keyword">import</span> android.view.View;  </div><div class="line"><span class="keyword">import</span> android.view.Window;  </div><div class="line"><span class="keyword">import</span> android.widget.Button;  </div><div class="line"><span class="keyword">import</span> android.widget.EditText;  </div><div class="line"><span class="keyword">import</span> android.widget.Toast;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String URL = <span class="string">"http://192.168.2.1:8080/JavaRegisterMysql/login"</span>;  </div><div class="line">      </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String res=<span class="string">""</span>;  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String name = <span class="string">""</span>;  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String code = <span class="string">""</span>;  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String phone =<span class="string">" "</span>;  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String chose=<span class="string">"0"</span>;  </div><div class="line">    Button connectButton=<span class="keyword">null</span>;  </div><div class="line">    Button registerButton=<span class="keyword">null</span>;  </div><div class="line">    EditText noteUser=<span class="keyword">null</span>;  </div><div class="line">    EditText notePassword=<span class="keyword">null</span>;      </div><div class="line">  </div><div class="line">      </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </div><div class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);  </div><div class="line">        setContentView(R.layout.activity_main);  </div><div class="line">          </div><div class="line">          </div><div class="line">        connectButton=(Button)findViewById(R.id.btnConnect);  </div><div class="line">        registerButton=(Button)findViewById(R.id.btnRegister);  </div><div class="line">        noteUser=(EditText)findViewById(R.id.editUserName);  </div><div class="line">        notePassword=(EditText)findViewById(R.id.editPassword);  </div><div class="line">  </div><div class="line">        <span class="comment">//////注意类Class DriverManager Statement ResultSet  </span></div><div class="line">          </div><div class="line">          </div><div class="line">        connectButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;  </div><div class="line">              </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;  </div><div class="line">                          </div><div class="line">                      </div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"正在登录"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        name = noteUser.getText().toString().trim();  </div><div class="line">                        code = notePassword.getText().toString().trim();      </div><div class="line">                        chose=<span class="string">"1"</span>;  </div><div class="line">                        <span class="keyword">new</span> SubmitAsyncTask().execute(URL);                          </div><div class="line">  </div><div class="line">                        Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"res = "</span>+res, Toast.LENGTH_SHORT).show();  </div><div class="line">                        <span class="keyword">if</span>(res.equals(<span class="string">"2"</span>))&#123;  </div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"登录成功"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                            <span class="comment">//Intent intent=new Intent();  </span></div><div class="line">                            <span class="comment">//intent.setClass(MainActivity.this, WriteNote.class);  </span></div><div class="line">                            <span class="comment">//MainActivity.this.startActivity(intent);  </span></div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res.equals(<span class="string">"1"</span>))&#123;  </div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"用户名或密码错误"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res.equals(<span class="string">"3"</span>))&#123;  </div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"注册失败"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res.equals(<span class="string">"4"</span>))&#123;  </div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"注册成功"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(res.equals(<span class="string">"-1"</span>))&#123;  </div><div class="line">                            Toast.makeText(MainActivity.<span class="keyword">this</span>, <span class="string">"网络异常"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;  </div><div class="line">                    &#125;         </div><div class="line">        &#125;);  </div><div class="line">        noteUser.setText(<span class="string">"ab"</span>);  </div><div class="line">        notePassword.setText(<span class="string">"123456"</span>);  </div><div class="line">          </div><div class="line">        registerButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;  </div><div class="line">              </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;  </div><div class="line">                                                  </div><div class="line">                        Intent intent=<span class="keyword">new</span> Intent();  </div><div class="line">                        intent.setClass(MainActivity.<span class="keyword">this</span>, Register.class);  </div><div class="line">                        MainActivity.<span class="keyword">this</span>.startActivity(intent);  </div><div class="line">                                              </div><div class="line">                    &#125;         </div><div class="line">        &#125;);  </div><div class="line">          </div><div class="line">    &#125;  </div><div class="line">          </div><div class="line">  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;  </div><div class="line">        <span class="comment">// Inflate the menu; this adds items to the action bar if it is present.  </span></div><div class="line">        getMenuInflater().inflate(R.menu.main, menu);  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">          </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  以上为手机主界面函数调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example.java4androidmysql;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> android.app.Activity;  </div><div class="line"><span class="keyword">import</span> android.os.Bundle;  </div><div class="line"><span class="keyword">import</span> android.view.View;  </div><div class="line"><span class="keyword">import</span> android.view.Window;  </div><div class="line"><span class="keyword">import</span> android.widget.Button;  </div><div class="line"><span class="keyword">import</span> android.widget.EditText;  </div><div class="line"><span class="keyword">import</span> android.widget.Toast;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Register</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String URL = <span class="string">"http://192.168.2.1:8080/JavaRegisterMysql/login"</span>;  </div><div class="line">    Button backButton=<span class="keyword">null</span>;  </div><div class="line">    Button registerButton=<span class="keyword">null</span>;  </div><div class="line">    EditText user=<span class="keyword">null</span>;  </div><div class="line">    EditText password=<span class="keyword">null</span>;  </div><div class="line">    EditText phone=<span class="keyword">null</span>;  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </div><div class="line">        <span class="comment">// TODO Auto-generated method stub  </span></div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </div><div class="line">        requestWindowFeature(Window.FEATURE_NO_TITLE);  </div><div class="line">        setContentView(R.layout.register);  </div><div class="line">          </div><div class="line">        backButton=(Button)findViewById(R.id.btnBack);  </div><div class="line">        registerButton=(Button)findViewById(R.id.btnRegister);  </div><div class="line">        user=(EditText)findViewById(R.id.editUserName);  </div><div class="line">        password=(EditText)findViewById(R.id.editPassword);  </div><div class="line">        phone=(EditText)findViewById(R.id.editPhone);  </div><div class="line">  </div><div class="line">        <span class="comment">//////注意类Class DriverManager Statement ResultSet  </span></div><div class="line">          </div><div class="line">          </div><div class="line">        registerButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;  </div><div class="line">              </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;                         </div><div class="line">                          </div><div class="line">                        MainActivity.name = user.getText().toString().trim();  </div><div class="line">                        MainActivity.code = password.getText().toString().trim();  </div><div class="line">                        MainActivity.phone = phone.getText().toString().trim();  </div><div class="line">                        MainActivity.chose=<span class="string">"2"</span>;  </div><div class="line">                          </div><div class="line">                        <span class="keyword">new</span> SubmitAsyncTask().execute(URL);                       </div><div class="line">  </div><div class="line">                        Toast.makeText(Register.<span class="keyword">this</span>, <span class="string">"res = "</span>+MainActivity.res, Toast.LENGTH_SHORT).show();  </div><div class="line">                        <span class="keyword">if</span>(MainActivity.res.equals(<span class="string">"2"</span>))&#123;  </div><div class="line">                            Toast.makeText(Register.<span class="keyword">this</span>, <span class="string">"登录成功"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                            <span class="comment">//Intent intent=new Intent();  </span></div><div class="line">                            <span class="comment">//intent.setClass(MainActivity.this, WriteNote.class);  </span></div><div class="line">                            <span class="comment">//MainActivity.this.startActivity(intent);  </span></div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(MainActivity.res.equals(<span class="string">"1"</span>))&#123;  </div><div class="line">                            Toast.makeText(Register.<span class="keyword">this</span>, <span class="string">"用户名或密码错误"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(MainActivity.res.equals(<span class="string">"3"</span>))&#123;  </div><div class="line">                            Toast.makeText(Register.<span class="keyword">this</span>, <span class="string">"注册失败"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(MainActivity.res.equals(<span class="string">"4"</span>))&#123;  </div><div class="line">                            Toast.makeText(Register.<span class="keyword">this</span>, <span class="string">"注册成功"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(MainActivity.res.equals(<span class="string">"-1"</span>))&#123;  </div><div class="line">                            Toast.makeText(Register.<span class="keyword">this</span>, <span class="string">"网络异常"</span>, Toast.LENGTH_SHORT).show();  </div><div class="line">                        &#125;  </div><div class="line">                                              </div><div class="line">                    &#125;         </div><div class="line">        &#125;);  </div><div class="line">        user.setText(<span class="string">"gjw"</span>);  </div><div class="line">        password.setText(<span class="string">"123"</span>);  </div><div class="line">        phone.setText(<span class="string">"13570236302"</span>);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>  以上为注册界面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.example.java4androidmysql;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> java.io.IOException;  </div><div class="line"><span class="keyword">import</span> java.io.UnsupportedEncodingException;  </div><div class="line"><span class="keyword">import</span> java.util.ArrayList;  </div><div class="line"><span class="keyword">import</span> java.util.List;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> org.apache.http.HttpResponse;  </div><div class="line"><span class="keyword">import</span> org.apache.http.HttpStatus;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.ClientProtocolException;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.HttpClient;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.entity.UrlEncodedFormEntity;  </div><div class="line"><span class="keyword">import</span> org.apache.http.client.methods.HttpPost;  </div><div class="line"><span class="keyword">import</span> org.apache.http.conn.params.ConnManagerParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.impl.client.DefaultHttpClient;  </div><div class="line"><span class="keyword">import</span> org.apache.http.message.BasicNameValuePair;  </div><div class="line"><span class="keyword">import</span> org.apache.http.params.BasicHttpParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.params.HttpConnectionParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.params.HttpParams;  </div><div class="line"><span class="keyword">import</span> org.apache.http.protocol.HTTP;  </div><div class="line"><span class="keyword">import</span> org.apache.http.util.EntityUtils;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> android.os.AsyncTask;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SubmitAsyncTask</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">String</span>, <span class="title">Integer</span>, <span class="title">String</span>&gt;</span>&#123;  </div><div class="line">    String info = <span class="string">""</span>;  </div><div class="line">    <span class="function"><span class="keyword">protected</span> String <span class="title">doInBackground</span><span class="params">(String... params)</span> </span>&#123;  </div><div class="line">        <span class="comment">// TODO Auto-generated method stub  </span></div><div class="line">        String url = params[<span class="number">0</span>];  </div><div class="line">        String reps = <span class="string">""</span>;              </div><div class="line">        reps = doPost(url);  </div><div class="line">        <span class="keyword">return</span> reps;  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String result)</span> </span>&#123;  </div><div class="line">        <span class="comment">// TODO Auto-generated method stub  </span></div><div class="line">        MainActivity.res = result.trim();  </div><div class="line">        <span class="keyword">super</span>.onPostExecute(result);  </div><div class="line">    &#125;       </div><div class="line">  </div><div class="line"><span class="comment">/** </span></div><div class="line"> * 用Post方式跟服务器传递数据 </div><div class="line"> * <span class="doctag">@param</span> url </div><div class="line"> * <span class="doctag">@return</span> </div><div class="line"> */  </div><div class="line"><span class="function"><span class="keyword">private</span> String <span class="title">doPost</span><span class="params">(String url)</span></span>&#123;  </div><div class="line">    String responseStr = <span class="string">""</span>;  </div><div class="line">    <span class="keyword">try</span> &#123;  </div><div class="line">        <span class="comment">//发送post类型请求  </span></div><div class="line">        HttpPost httpRequest = <span class="keyword">new</span> HttpPost(url);  </div><div class="line">        HttpParams params = <span class="keyword">new</span> BasicHttpParams();  </div><div class="line">        ConnManagerParams.setTimeout(params, <span class="number">1000</span>); <span class="comment">//从连接池中获取连接的超时时间  </span></div><div class="line">        HttpConnectionParams.setConnectionTimeout(params, <span class="number">3000</span>);<span class="comment">//通过网络与服务器建立连接的超时时间  </span></div><div class="line">        HttpConnectionParams.setSoTimeout(params, <span class="number">5000</span>);<span class="comment">//读响应数据的超时时间  </span></div><div class="line">        httpRequest.setParams(params);  </div><div class="line">          </div><div class="line">        <span class="comment">//下面开始跟服务器传递数据，使用BasicNameValuePair  </span></div><div class="line">        List&lt;BasicNameValuePair&gt; paramsList = <span class="keyword">new</span> ArrayList&lt;BasicNameValuePair&gt;();  </div><div class="line">          </div><div class="line">        paramsList.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"NAME"</span>, MainActivity.name));  </div><div class="line">        paramsList.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"CODE"</span>, MainActivity.code));  </div><div class="line">        paramsList.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"PHONE"</span>, MainActivity.phone));  </div><div class="line">        paramsList.add(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"CHOSE"</span>, MainActivity.chose));  </div><div class="line">          </div><div class="line">        UrlEncodedFormEntity mUrlEncodeFormEntity = <span class="keyword">new</span> UrlEncodedFormEntity(paramsList, HTTP.UTF_8);  </div><div class="line">        httpRequest.setEntity(mUrlEncodeFormEntity);  </div><div class="line">          </div><div class="line">        <span class="comment">////////////////////////////////////////////////  </span></div><div class="line">        HttpClient httpClient = <span class="keyword">new</span> DefaultHttpClient();  </div><div class="line">        HttpResponse httpResponse = httpClient.execute(httpRequest);  </div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> ret = httpResponse.getStatusLine().getStatusCode();  </div><div class="line">        <span class="keyword">if</span>(ret == HttpStatus.SC_OK)&#123;  </div><div class="line">            responseStr = EntityUtils.toString(httpResponse.getEntity(), HTTP.UTF_8);  </div><div class="line">        &#125;<span class="keyword">else</span>&#123;  </div><div class="line">            responseStr = <span class="string">"-1"</span>;  </div><div class="line">        &#125;  </div><div class="line">  </div><div class="line">        &#125; <span class="keyword">catch</span> (UnsupportedEncodingException e) &#123;  </div><div class="line">            <span class="comment">// TODO Auto-generated catch block  </span></div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125; <span class="keyword">catch</span> (ClientProtocolException e) &#123;  </div><div class="line">            <span class="comment">// TODO Auto-generated catch block  </span></div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;  </div><div class="line">            <span class="comment">// TODO Auto-generated catch block  </span></div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125;  </div><div class="line">   </div><div class="line">        <span class="keyword">return</span> responseStr;  </div><div class="line">  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  以上为接口类，但写得可能有些不对（如返回变量那里是上次调用的），略忙，等再改一下。</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>  </span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>  </div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@drawable/ab"</span> &gt;  </div><div class="line">  </div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span>  </span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/FRppt01"</span>  </div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">        <span class="attr">android:text</span>=<span class="string">"@string/Title"</span>   </div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"15pt"</span>  </div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"#FFFFFF"</span>  </div><div class="line">        <span class="attr">android:textStyle</span>=<span class="string">"bold"</span>  </div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"40dp"</span>  </div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center_horizontal"</span>  </div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"3dip"</span>/&gt;  </div><div class="line">         </div><div class="line">    <span class="tag">&lt;<span class="name">EditText</span>  </span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/editUserName"</span>  </div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">        <span class="attr">android:hint</span>=<span class="string">"输入用户名"</span>/&gt;  </div><div class="line">      </div><div class="line">    <span class="tag">&lt;<span class="name">EditText</span>  </span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/editPassword"</span>  </div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">        <span class="attr">android:hint</span>=<span class="string">"输入密码"</span>/&gt;  </div><div class="line">          </div><div class="line">      <span class="tag">&lt;<span class="name">TableLayout</span>   </span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>&gt;  </div><div class="line">            <span class="tag">&lt;<span class="name">TableRow</span>&gt;</span>  </div><div class="line">                <span class="tag">&lt;<span class="name">Button</span>  </span></div><div class="line">                    <span class="attr">android:id</span>=<span class="string">"@+id/btnConnect"</span>  </div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                    <span class="attr">android:text</span>=<span class="string">"登录"</span>  </div><div class="line">                    <span class="attr">android:layout_marginTop</span>=<span class="string">"260dp"</span>                     </div><div class="line">                    <span class="attr">android:layout_weight</span>=<span class="string">"1"</span> /&gt;  </div><div class="line">                <span class="tag">&lt;<span class="name">Button</span>  </span></div><div class="line">                    <span class="attr">android:id</span>=<span class="string">"@+id/btnRegister"</span>  </div><div class="line">                    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                    <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                    <span class="attr">android:text</span>=<span class="string">"注册"</span>   </div><div class="line">                    <span class="attr">android:layout_marginTop</span>=<span class="string">"260dp"</span>                     </div><div class="line">                    <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>/&gt;"  </div><div class="line">            <span class="tag">&lt;/<span class="name">TableRow</span>&gt;</span>  </div><div class="line">         <span class="tag">&lt;/<span class="name">TableLayout</span>&gt;</span>  </div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;  </div><div class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>  </span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>  </div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>  </div><div class="line">    <span class="attr">android:background</span>=<span class="string">"@drawable/ab"</span> &gt;  </div><div class="line">  </div><div class="line">    <span class="tag">&lt;<span class="name">TextView</span>  </span></div><div class="line">        <span class="attr">android:id</span>=<span class="string">"@+id/FRppt01"</span>  </div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">        <span class="attr">android:text</span>=<span class="string">"@string/RegisterPage"</span>   </div><div class="line">        <span class="attr">android:textSize</span>=<span class="string">"15pt"</span>  </div><div class="line">        <span class="attr">android:textColor</span>=<span class="string">"#FFFFFF"</span>  </div><div class="line">        <span class="attr">android:textStyle</span>=<span class="string">"bold"</span>  </div><div class="line">        <span class="attr">android:layout_marginTop</span>=<span class="string">"40dp"</span>  </div><div class="line">        <span class="attr">android:gravity</span>=<span class="string">"center_horizontal"</span>  </div><div class="line">        <span class="attr">android:padding</span>=<span class="string">"3dip"</span>/&gt;  </div><div class="line">      </div><div class="line">    <span class="tag">&lt;<span class="name">TableLayout</span>  </span></div><div class="line">        <span class="attr">android:layout_below</span>=<span class="string">"@id/FRppt01"</span>   </div><div class="line">        <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">        <span class="attr">android:stretchColumns</span>=<span class="string">"1"</span>  </div><div class="line">        <span class="attr">android:layout_marginLeft</span>=<span class="string">"10dip"</span>  </div><div class="line">        <span class="attr">android:layout_marginRight</span>=<span class="string">"10dip"</span>  </div><div class="line">        &gt;  </div><div class="line">        <span class="tag">&lt;<span class="name">TableRow</span>   </span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">            <span class="attr">android:layout_marginBottom</span>=<span class="string">"5dip"</span>&gt;  </div><div class="line">      </div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span>   </span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/textUserName"</span>  </div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:textSize</span>=<span class="string">"12pt"</span>  </div><div class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                <span class="attr">android:layout_below</span>=<span class="string">"@id/FRppt01"</span>  </div><div class="line">                <span class="attr">android:text</span>=<span class="string">"@string/userName"</span>/&gt;"  </div><div class="line">            <span class="tag">&lt;<span class="name">EditText</span>  </span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/editUserName"</span>  </div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                /&gt;  </div><div class="line">        <span class="tag">&lt;/<span class="name">TableRow</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">TableRow</span>   </span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">            <span class="attr">android:layout_marginBottom</span>=<span class="string">"5dip"</span>&gt;  </div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span>   </span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/textPassword"</span>  </div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                <span class="attr">android:textSize</span>=<span class="string">"12pt"</span>  </div><div class="line">                <span class="attr">android:text</span>=<span class="string">"@string/passWord"</span>/&gt;  </div><div class="line">            <span class="tag">&lt;<span class="name">EditText</span>  </span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/editPassword"</span>  </div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                /&gt;  </div><div class="line">        <span class="tag">&lt;/<span class="name">TableRow</span>&gt;</span>  </div><div class="line">        <span class="tag">&lt;<span class="name">TableRow</span>   </span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">            <span class="attr">android:layout_marginBottom</span>=<span class="string">"5dip"</span>&gt;                </div><div class="line">            <span class="tag">&lt;<span class="name">TextView</span>   </span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/textPhone"</span>  </div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                <span class="attr">android:textSize</span>=<span class="string">"12pt"</span>  </div><div class="line">                <span class="attr">android:text</span>=<span class="string">"@string/phone"</span>/&gt;  </div><div class="line">            <span class="tag">&lt;<span class="name">EditText</span>  </span></div><div class="line">                <span class="attr">android:id</span>=<span class="string">"@+id/editPhone"</span>  </div><div class="line">                <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>                 </div><div class="line">                /&gt;  </div><div class="line">        <span class="tag">&lt;/<span class="name">TableRow</span>&gt;</span>  </div><div class="line">    <span class="tag">&lt;/<span class="name">TableLayout</span>&gt;</span>  </div><div class="line">          </div><div class="line">      <span class="tag">&lt;<span class="name">TableLayout</span>   </span></div><div class="line">            <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">            <span class="attr">android:layout_height</span>=<span class="string">"fill_parent"</span>  </div><div class="line">            &gt;  </div><div class="line">  </div><div class="line">          <span class="tag">&lt;<span class="name">TableRow</span>&gt;</span>  </div><div class="line">  </div><div class="line">              <span class="tag">&lt;<span class="name">Button</span>  </span></div><div class="line">                  <span class="attr">android:id</span>=<span class="string">"@+id/btnBack"</span>  </div><div class="line">                  <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                  <span class="attr">android:layout_marginTop</span>=<span class="string">"260dp"</span>  </div><div class="line">                  <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                  <span class="attr">android:text</span>=<span class="string">"@string/Back"</span> /&gt;  </div><div class="line">  </div><div class="line">              <span class="tag">&lt;<span class="name">Button</span>  </span></div><div class="line">                  <span class="attr">android:id</span>=<span class="string">"@+id/btnRegister"</span>  </div><div class="line">                  <span class="attr">android:layout_width</span>=<span class="string">"fill_parent"</span>  </div><div class="line">                  <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>  </div><div class="line">                  <span class="attr">android:layout_marginTop</span>=<span class="string">"260dp"</span>  </div><div class="line">                  <span class="attr">android:layout_weight</span>=<span class="string">"1"</span>  </div><div class="line">                  <span class="attr">android:text</span>=<span class="string">"@string/Register"</span> /&gt;  </div><div class="line">          <span class="tag">&lt;/<span class="name">TableRow</span>&gt;</span>  </div><div class="line">  </div><div class="line">         <span class="tag">&lt;/<span class="name">TableLayout</span>&gt;</span>  </div><div class="line">  </div><div class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>  以上两段代码为布局文件代码。</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+        <a href="https://enjoyhot.github.io/2014/11/21/tomcat-client/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://enjoyhot.github.io/2014/11/21/tomcat-client/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2014/11/21/tomcat-server/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    利用简易Tomcat服务器结合MysqL实现Android手机注册与登录(服务器部分)        
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2014/11/21/tomcat-client/" data-title="利用简易Tomcat服务器结合MysqL实现Android手机注册与登录(客户端部分)        " data-url="https://enjoyhot.github.io/2014/11/21/tomcat-client/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/07/08/Stacking/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Machine-Learning/">Machine Learning</a></p>
+                            <p class="item-title"><a href="/2016/07/08/Stacking/" class="title">Stacking</a></p>
+                            <p class="item-date"><time datetime="2016-07-08T09:04:30.000Z" itemprop="datePublished">2016-07-08</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/05/03/通过欢迎度对网页排名/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/05/03/通过欢迎度对网页排名/" class="title">通过欢迎度对网页排名</a></p>
+                            <p class="item-date"><time datetime="2015-05-03T07:30:50.000Z" itemprop="datePublished">2015-05-03</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/04/21/网络搜索引擎简介/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Search-Engine/">Search Engine</a></p>
+                            <p class="item-title"><a href="/2015/04/21/网络搜索引擎简介/" class="title">网络搜索引擎简介</a></p>
+                            <p class="item-date"><time datetime="2015-04-21T05:23:50.000Z" itemprop="datePublished">2015-04-21</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/29/CSDN2Markdown/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/life/">life</a></p>
+                            <p class="item-title"><a href="/2015/03/29/CSDN2Markdown/" class="title">export CSDN blog to Markdown</a></p>
+                            <p class="item-date"><time datetime="2015-03-29T08:40:00.000Z" itemprop="datePublished">2015-03-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2015/03/26/myphoto/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/photo/">photo</a></p>
+                            <p class="item-title"><a href="/2015/03/26/myphoto/" class="title">photos</a></p>
+                            <p class="item-date"><time datetime="2015-03-26T15:45:21.000Z" itemprop="datePublished">2015-03-26</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/HPC/">HPC</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Machine-Learning/">Machine Learning</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Search-Engine/">Search Engine</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/database/">database</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/django/">django</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/life/">life</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/photo/">photo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/tea/">tea</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">April 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">9</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSDN/">CSDN</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML-foundation/">ML foundation</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageRank/">PageRank</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/benchmark/">benchmark</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/classifier/">classifier</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cluster/">cluster</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js-func/">js func</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/life/">life</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoengine/">mongoengine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ndk/">ndk</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/photo/">photo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pymongo/">pymongo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-foundation/">python foundation</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-web/">python web</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflect/">reflect</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/scrapy/">scrapy</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/servlet/">servlet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spider/">spider</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tea/">tea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virtual-box/">virtual box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实验室/">实验室</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/CSDN/" style="font-size: 13.33px;">CSDN</a> <a href="/tags/ML-foundation/" style="font-size: 20px;">ML foundation</a> <a href="/tags/PageRank/" style="font-size: 13.33px;">PageRank</a> <a href="/tags/benchmark/" style="font-size: 10px;">benchmark</a> <a href="/tags/classifier/" style="font-size: 10px;">classifier</a> <a href="/tags/cluster/" style="font-size: 10px;">cluster</a> <a href="/tags/js-func/" style="font-size: 13.33px;">js func</a> <a href="/tags/life/" style="font-size: 16.67px;">life</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoengine/" style="font-size: 10px;">mongoengine</a> <a href="/tags/ndk/" style="font-size: 13.33px;">ndk</a> <a href="/tags/photo/" style="font-size: 10px;">photo</a> <a href="/tags/pymongo/" style="font-size: 10px;">pymongo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/python-foundation/" style="font-size: 10px;">python foundation</a> <a href="/tags/python-web/" style="font-size: 10px;">python web</a> <a href="/tags/reflect/" style="font-size: 10px;">reflect</a> <a href="/tags/scrapy/" style="font-size: 10px;">scrapy</a> <a href="/tags/servlet/" style="font-size: 13.33px;">servlet</a> <a href="/tags/spider/" style="font-size: 16.67px;">spider</a> <a href="/tags/tea/" style="font-size: 10px;">tea</a> <a href="/tags/tomcat/" style="font-size: 13.33px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/virtual-box/" style="font-size: 10px;">virtual box</a> <a href="/tags/实验室/" style="font-size: 10px;">实验室</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://blog.csdn.net/gugugujiawei">enjoyhot&#39;s CSDN</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 enjoyhot<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'enjoyhot'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
