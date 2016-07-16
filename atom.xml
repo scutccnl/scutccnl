@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://enjoyhot.github.io/"/>
-  <updated>2016-07-16T09:53:19.538Z</updated>
+  <updated>2016-07-16T12:00:07.074Z</updated>
   <id>http://enjoyhot.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Stacking</title>
+    <title>ensemble-stacking</title>
     <link href="http://enjoyhot.github.io/2016/05/08/ensemble-stacking/"/>
     <id>http://enjoyhot.github.io/2016/05/08/ensemble-stacking/</id>
     <published>2016-05-08T09:04:30.000Z</published>
-    <updated>2016-07-16T09:53:19.538Z</updated>
+    <updated>2016-07-16T12:00:07.074Z</updated>
     
     <content type="html">&lt;h1 id=&quot;测试blog&quot;&gt;&lt;a href=&quot;#测试blog&quot; class=&quot;headerlink&quot; title=&quot;测试blog&quot;&gt;&lt;/a&gt;测试blog&lt;/h1&gt;&lt;hr&gt;
 &lt;ul&gt;
@@ -237,7 +237,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/05/03/%E9%80%9A%E8%BF%87%E6%AC%A2%E8%BF%8E%E5%BA%A6%E5%AF%B9%E7%BD%91%E9%A1%B5%E6%8E%92%E5%90%8D/"/>
     <id>http://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/</id>
     <published>2015-05-03T07:30:50.000Z</published>
-    <updated>2016-07-16T06:35:11.722Z</updated>
+    <updated>2016-07-16T09:53:19.710Z</updated>
     
     <content type="html">&lt;p&gt;声明：由于此次第一次使用动态加载的表达式，hexo对LaTex支持可能不太好，因此这里有些公式显示奇奇怪怪，排版比较好一点的参考csdn:&lt;a href=&quot;http://blog.csdn.net/gugugujiawei/article/details/45459089&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;博客链接&lt;/a&gt;,下次就直接上图片算了。免得这边不兼容。&lt;/p&gt;
 &lt;h1 id=&quot;一、欢迎度历史&quot;&gt;&lt;a href=&quot;#一、欢迎度历史&quot; class=&quot;headerlink&quot; title=&quot;一、欢迎度历史&quot;&gt;&lt;/a&gt;一、欢迎度历史&lt;/h1&gt;&lt;p&gt;1998年 Jon Kleinberg致力于HITS的万维网搜索引擎项目，其中的算法使用了万维网的超链接结构来改进搜索引擎所得的结果。&lt;/p&gt;
@@ -306,7 +306,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/04/21/%E7%BD%91%E7%BB%9C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B/"/>
     <id>http://enjoyhot.github.io/2015/04/21/网络搜索引擎简介/</id>
     <published>2015-04-21T05:23:50.000Z</published>
-    <updated>2016-07-16T06:35:11.726Z</updated>
+    <updated>2016-07-16T09:53:19.722Z</updated>
     
     <content type="html">&lt;h1 id=&quot;一、传统信息检索回顾&quot;&gt;&lt;a href=&quot;#一、传统信息检索回顾&quot; class=&quot;headerlink&quot; title=&quot;一、传统信息检索回顾&quot;&gt;&lt;/a&gt;一、传统信息检索回顾&lt;/h1&gt;&lt;p&gt;传统信息检索文档集的搜索有三种基本的计算机辅助技术：布尔模型、向量空间模型和概率模型。这些模型发展与20世纪60年代，直到2000年6月，便存在3500种不同的搜索引擎技术，并且大多数搜索引擎仍然依赖于以上三种基本模型的一种或数种。下图摘自《搜索引擎-原理技术与系统》，显示了搜索的主干流程。&lt;br&gt;&lt;img src=&quot;http://img.blog.csdn.net/20150421133224646&quot; alt=&quot;这里写图片描述&quot;&gt;&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;##1.1 布尔搜索引擎&lt;br&gt;信息检索中最早而且最简单的检索方法之一。布尔逻辑检索也称作布尔逻辑搜索，严格意义上的布尔检索法是指利用布尔逻辑运算符连接各个检索词，然后由计算机进行相应逻辑运算，以找出所需信息的方法。它使用面最广、使用频率最高。布尔逻辑运算符的作用是把检索词连接起来，构成一个逻辑检索式。&lt;/p&gt;
@@ -353,7 +353,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/03/29/CSDN2Markdown/"/>
     <id>http://enjoyhot.github.io/2015/03/29/CSDN2Markdown/</id>
     <published>2015-03-29T08:40:00.000Z</published>
-    <updated>2016-07-16T06:35:11.690Z</updated>
+    <updated>2016-07-16T09:53:19.526Z</updated>
     
     <content type="html">&lt;p&gt;#一、综述&lt;/p&gt;
 &lt;p&gt;最开始的博客用的是oschina, 自我感觉小清新，支持比较多风格的编辑器，容易编辑程度比csdn的要好。后来因为csdn人气的关系，又转到csdn，不过csdn编辑确实比较虐心，再后来就在服务器上搭一个WordPress的博客，不过用起来不是很爽。几个月前支持Markdown编辑，这无疑给用github pages的用户一个福音，因为可以直接上传到自己的github博客上。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;用github pages生成静态的页面，目前比较流行有Jekyll,Octopress,Hexo等，其他的我没怎么调查，jekyll是github推荐的，上面有他们给的官方框架、主题，支持网页书写Markdown文章。后两者需要编译后再上传，github上呈现出来的是html文件。总体而言，后两者的界面更好，用起来更加舒适。我用的是Hexo，命令简洁，不过要注意备份整个工程，不然后果不堪设想。&lt;/p&gt;
@@ -385,7 +385,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/03/26/myphoto/"/>
     <id>http://enjoyhot.github.io/2015/03/26/myphoto/</id>
     <published>2015-03-26T15:45:21.000Z</published>
-    <updated>2016-07-16T06:35:11.706Z</updated>
+    <updated>2016-07-16T09:53:19.610Z</updated>
     
     <content type="html">&lt;p&gt;say something show&lt;/p&gt;
 </content>
@@ -409,7 +409,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/03/24/HPC-cluster/"/>
     <id>http://enjoyhot.github.io/2015/03/24/HPC-cluster/</id>
     <published>2015-03-24T12:23:50.000Z</published>
-    <updated>2016-07-16T06:35:11.694Z</updated>
+    <updated>2016-07-16T09:53:19.546Z</updated>
     
     <content type="html">&lt;p&gt;　　在本文之前，我建议先看完这篇文章：&lt;a href=&quot;http://www.jointforce.com.cn/page/hardware_linux.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Linux高性能计算集群 – Beowulf集群&lt;/a&gt;　　&lt;/p&gt;
 &lt;p&gt;#一、搭建集群中可能会遇到的问题&lt;/p&gt;
@@ -492,7 +492,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/03/24/hpc-benchmark/"/>
     <id>http://enjoyhot.github.io/2015/03/24/hpc-benchmark/</id>
     <published>2015-03-24T06:43:00.000Z</published>
-    <updated>2016-07-16T06:35:11.694Z</updated>
+    <updated>2016-07-16T09:53:19.542Z</updated>
     
     <content type="html">&lt;p&gt;#一、介绍&lt;/p&gt;
 &lt;p&gt;　　说到高性能计算，一般都是利用搭建集群配合加速卡做并行计算实现。但用相同的硬件实现更快的方法，那就是做测试了。比较有名的就是Linpack测试了，Linpack现在在国际上已经成为最流行的用于测试高性能计算机系统浮点性能的benchmark，在高性能领域，就是利用其中的HPL测试进行测试。下面摘一段百科上的解释:&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;　　&lt;/p&gt;
@@ -557,7 +557,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/03/19/study-thinking-20150319/"/>
     <id>http://enjoyhot.github.io/2015/03/19/study-thinking-20150319/</id>
     <published>2015-03-19T05:42:00.000Z</published>
-    <updated>2016-07-16T06:35:11.722Z</updated>
+    <updated>2016-07-16T09:53:19.682Z</updated>
     
     <content type="html">&lt;h1 id=&quot;社会篇&quot;&gt;&lt;a href=&quot;#社会篇&quot; class=&quot;headerlink&quot; title=&quot;社会篇&quot;&gt;&lt;/a&gt;社会篇&lt;/h1&gt;&lt;p&gt;   走过2014，看得很多是互联网如何在颠覆各个行业。以下说的都是感悟，可能有些无序，多多包含。&lt;/p&gt;
 &lt;p&gt;   无论是做科研也好，投入社会工作也罢，在做以互联网技术为核心的技术学习时，都要有一个目标，做出为社会认可的有价值的“产品”，并间接体现为金钱财富。&lt;/p&gt;
@@ -596,7 +596,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/02/25/machinelearning-KNN/"/>
     <id>http://enjoyhot.github.io/2015/02/25/machinelearning-KNN/</id>
     <published>2015-02-25T08:04:00.000Z</published>
-    <updated>2016-07-16T06:35:11.702Z</updated>
+    <updated>2016-07-16T09:53:19.590Z</updated>
     
     <content type="html">&lt;p&gt;适逢学习机器学习基础知识，就将书中内容读读记记，本博文代码参考书本Machine Learning in Action（《机器学习实战》）。&lt;/p&gt;
 &lt;h1 id=&quot;一、概述&quot;&gt;&lt;a href=&quot;#一、概述&quot; class=&quot;headerlink&quot; title=&quot;一、概述&quot;&gt;&lt;/a&gt;一、概述&lt;/h1&gt;&lt;p&gt;kNN算法又称为k近邻分类(k-nearest neighbor classification)算法。&lt;/p&gt;
@@ -648,7 +648,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/01/21/python-scrapy/"/>
     <id>http://enjoyhot.github.io/2015/01/21/python-scrapy/</id>
     <published>2015-01-21T07:12:00.000Z</published>
-    <updated>2016-07-16T06:35:11.718Z</updated>
+    <updated>2016-07-16T09:53:19.678Z</updated>
     
     <content type="html">&lt;h1 id=&quot;一、综述&quot;&gt;&lt;a href=&quot;#一、综述&quot; class=&quot;headerlink&quot; title=&quot;一、综述&quot;&gt;&lt;/a&gt;一、综述&lt;/h1&gt;&lt;p&gt;  开始这篇博文之前，调研了相关的爬虫方法，简单罗列冰山一角。&lt;/p&gt;
 &lt;p&gt;  综述：&lt;/p&gt;
@@ -730,7 +730,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/01/21/machinelearning-linear-regularization/"/>
     <id>http://enjoyhot.github.io/2015/01/21/machinelearning-linear-regularization/</id>
     <published>2015-01-21T06:57:00.000Z</published>
-    <updated>2016-07-16T06:35:11.706Z</updated>
+    <updated>2016-07-16T09:53:19.606Z</updated>
     
     <content type="html">&lt;h1 id=&quot;一、机器学习范式&quot;&gt;&lt;a href=&quot;#一、机器学习范式&quot; class=&quot;headerlink&quot; title=&quot;一、机器学习范式&quot;&gt;&lt;/a&gt;一、机器学习范式&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;1、按数据类型划分(带标签与否)&lt;/strong&gt;&lt;br&gt;  &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;  &lt;img src=&quot;http://img.blog.csdn.net/20150121143726836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VndWd1amlhd2Vp/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;  这是从样本的数据进行划分，现实中大部分属于半监督学习，并且大部分数据是没分类好的。&lt;/p&gt;
@@ -809,7 +809,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/01/20/songsong/"/>
     <id>http://enjoyhot.github.io/2015/01/20/songsong/</id>
     <published>2015-01-20T13:30:26.000Z</published>
-    <updated>2016-07-16T06:35:11.718Z</updated>
+    <updated>2016-07-16T09:53:19.682Z</updated>
     
     <content type="html">&lt;p&gt;&lt;img src=&quot;https://enjoyhot.github.io/img/arcticle_pic/201501/012001.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;我唱自己的歌&lt;br&gt;在布满车前草的道路上&lt;br&gt;在灌木的集市上&lt;br&gt;在雪松和白桦树的舞会上&lt;br&gt;在那山野的原始欢乐上&lt;br&gt;我唱自己的歌&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;我唱自己的歌&lt;br&gt;在热电厂恐怖的烟云中&lt;br&gt;在变速箱复杂的组织中&lt;br&gt;在砂轮的亲吻中&lt;br&gt;在那社会文明的运行中&lt;br&gt;我唱自己的歌&lt;/p&gt;
@@ -842,7 +842,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/01/18/machinelearning-linear-regression/"/>
     <id>http://enjoyhot.github.io/2015/01/18/machinelearning-linear-regression/</id>
     <published>2015-01-18T11:43:00.000Z</published>
-    <updated>2016-07-16T06:35:11.702Z</updated>
+    <updated>2016-07-16T09:53:19.602Z</updated>
     
     <content type="html">&lt;h1 id=&quot;一、曲线拟合&quot;&gt;&lt;a href=&quot;#一、曲线拟合&quot; class=&quot;headerlink&quot; title=&quot;一、曲线拟合&quot;&gt;&lt;/a&gt;一、曲线拟合&lt;/h1&gt;&lt;p&gt;  &lt;strong&gt;1、问题引入&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;  ①假设现在有一份关于某城市的住房面积与相应房价的数据集&lt;br&gt; &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -987,7 +987,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/01/18/python-analysis/"/>
     <id>http://enjoyhot.github.io/2015/01/18/python-analysis/</id>
     <published>2015-01-18T05:36:00.000Z</published>
-    <updated>2016-07-16T06:35:11.714Z</updated>
+    <updated>2016-07-16T09:53:19.658Z</updated>
     
     <content type="html">&lt;h1 id=&quot;一、前文&quot;&gt;&lt;a href=&quot;#一、前文&quot; class=&quot;headerlink&quot; title=&quot;一、前文&quot;&gt;&lt;/a&gt;一、前文&lt;/h1&gt;&lt;p&gt;  之前被叫去做网络爬虫，爬取新浪新闻的url，标题，内容和评论，不过在需求上有点改变，主要是评论的间隔被要求有‘\t’的分割，比如将&lt;/p&gt;
 &lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;comment&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2014-12-10 18:53:20	1004400533	遗弃亲生骨肉猪狗不如，难道就不怕受到良心谴责？你能睡得安稳？&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2014-12-10 17:17:07	3294923134	这父亲是人吗？&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;/&lt;span class=&quot;name&quot;&gt;comment&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
@@ -1034,7 +1034,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2015/01/15/python-web/"/>
     <id>http://enjoyhot.github.io/2015/01/15/python-web/</id>
     <published>2015-01-15T07:51:00.000Z</published>
-    <updated>2016-07-16T06:35:11.718Z</updated>
+    <updated>2016-07-16T09:53:19.678Z</updated>
     
     <content type="html">&lt;p&gt;本文为参考网上一些博客翻译以及想法，自己写的一篇总结博文，可能有重复的地方，纯粹总结只用。&lt;br&gt;阅读之前可参考:&lt;/p&gt;
 &lt;p&gt;  1、&lt;a href=&quot;http://anandology.com/blog/how-to-write-a-web-framework-in-python/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;How to write a web framework in Python&lt;/a&gt;（作者&lt;a href=&quot;https://github.com/anandology&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;anandology&lt;/a&gt;是&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;web.py代码的两位维护者之一，另一位则是大名鼎鼎却英年早逝的&lt;a href=&quot;http://www.aaronsw.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AaronSwartz&lt;/a&gt;  ）&lt;br&gt;  2、&lt;a href=&quot;http://bitworking.org/news/Why_so_many_Python_web_frameworks&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Why so many Python web frameworks?&lt;/a&gt; 也是一篇很好的文章，也许它会让您对Python中Web框架的敬畏之心荡然&lt;/p&gt;
@@ -1200,7 +1200,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2014/12/28/poor-day/"/>
     <id>http://enjoyhot.github.io/2014/12/28/poor-day/</id>
     <published>2014-12-28T12:23:50.000Z</published>
-    <updated>2016-07-16T06:35:11.710Z</updated>
+    <updated>2016-07-16T09:53:19.638Z</updated>
     
     <content type="html">&lt;p&gt;  今天是一个窘迫的一天，昨天上午去实验室，发现前天跑的爬虫还是没爬完，郁闷，有的爬的数据比它多用几个小时就跑完了，然后又开了一个cmd窗口继续跑另一个爬虫，后来司机，鼠标也动不了，强制关机后不进行硬盘检查（在笔记本经常这样做，省时），不过在台式机还是第一次这么干。今天终于尝到苦头。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;  今天依旧跑的是昨天强制关机后的那个程序（注意特指），不过下午才到的实验室，居然比昨天还慢，一半都没有。索性不理它，继续搞，再开窗口，到了四点多的时候，厄运来了，自动关机。自动重启，硬盘检查，不过启动失败直接进入系统修复，失败。想到的是四种方法，系统修复，安全模式，pe系统的修复，重装系统，后来真的只能重装系统了，pe系统修复那步也许做得不太好，不过以防万一，就将c盘中的虚拟机拷到f盘。&lt;/p&gt;
 &lt;p&gt;  也许是我频繁得对硬盘io进行操作，导致D盘受损，开始以为是系统问题，想继续做个系统，边做边上网搜方法，用了一下diskGenius，但最终还是得将d盘格式化，毕竟里面的东西我只放了个Dreamweaver而已，大不了再下一个。&lt;/p&gt;
@@ -1229,7 +1229,7 @@ git push -f origin master&lt;/code&gt;&lt;/p&gt;
     <link href="http://enjoyhot.github.io/2014/12/27/postgraduate-exam/"/>
     <id>http://enjoyhot.github.io/2014/12/27/postgraduate-exam/</id>
     <published>2014-12-27T12:45:09.000Z</published>
-    <updated>2016-07-16T06:35:11.710Z</updated>
+    <updated>2016-07-16T09:53:19.642Z</updated>
     
     <content type="html">&lt;p&gt;  微信发一条真诚祝福，也是对自己的祝福勉励，不忘自己是怎么走到这一步，运气背，但也阴差阳错。&lt;/p&gt;
 &lt;p&gt;  今天是考研的第一天，曾经很担心这一天的到来，直到9月中旬。&lt;br&gt;依稀记得，8月刚过20，内心甚是纠结，最后还是面对现实，做两手准备，虽是不甘，也无可奈何。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;br&gt;  今天起得不算太晚，9点出头，不想去实验室，只想到图书馆坐坐，看看书，一到那里，人出奇得多，不过转念一想，考试月，理所当然，自从大四后关于自习室的念想都是研究生层面啊。&lt;/p&gt;
