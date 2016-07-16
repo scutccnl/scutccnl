@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://enjoyhot.github.io/"/>
+  <link href="http://enjoyhot.github.io/"/>
   <updated>2016-07-16T06:35:11.718Z</updated>
-  <id>https://enjoyhot.github.io/</id>
+  <id>http://enjoyhot.github.io/</id>
   
   <author>
     <name>enjoyhot</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Stacking</title>
-    <link href="https://enjoyhot.github.io/2016/07/08/Stacking/"/>
-    <id>https://enjoyhot.github.io/2016/07/08/Stacking/</id>
+    <link href="http://enjoyhot.github.io/2016/07/08/Stacking/"/>
+    <id>http://enjoyhot.github.io/2016/07/08/Stacking/</id>
     <published>2016-07-08T09:04:30.000Z</published>
     <updated>2016-07-16T06:35:11.718Z</updated>
     
@@ -48,17 +48,17 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://enjoyhot.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://enjoyhot.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="ML foundation" scheme="https://enjoyhot.github.io/tags/ML-foundation/"/>
+      <category term="ML foundation" scheme="http://enjoyhot.github.io/tags/ML-foundation/"/>
     
   </entry>
   
   <entry>
     <title>通过欢迎度对网页排名</title>
-    <link href="https://enjoyhot.github.io/2015/05/03/%E9%80%9A%E8%BF%87%E6%AC%A2%E8%BF%8E%E5%BA%A6%E5%AF%B9%E7%BD%91%E9%A1%B5%E6%8E%92%E5%90%8D/"/>
-    <id>https://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/</id>
+    <link href="http://enjoyhot.github.io/2015/05/03/%E9%80%9A%E8%BF%87%E6%AC%A2%E8%BF%8E%E5%BA%A6%E5%AF%B9%E7%BD%91%E9%A1%B5%E6%8E%92%E5%90%8D/"/>
+    <id>http://enjoyhot.github.io/2015/05/03/通过欢迎度对网页排名/</id>
     <published>2015-05-03T07:30:50.000Z</published>
     <updated>2016-07-16T06:35:11.722Z</updated>
     
@@ -117,17 +117,17 @@
     
     </summary>
     
-      <category term="Search Engine" scheme="https://enjoyhot.github.io/categories/Search-Engine/"/>
+      <category term="Search Engine" scheme="http://enjoyhot.github.io/categories/Search-Engine/"/>
     
     
-      <category term="PageRank" scheme="https://enjoyhot.github.io/tags/PageRank/"/>
+      <category term="PageRank" scheme="http://enjoyhot.github.io/tags/PageRank/"/>
     
   </entry>
   
   <entry>
     <title>网络搜索引擎简介</title>
-    <link href="https://enjoyhot.github.io/2015/04/21/%E7%BD%91%E7%BB%9C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B/"/>
-    <id>https://enjoyhot.github.io/2015/04/21/网络搜索引擎简介/</id>
+    <link href="http://enjoyhot.github.io/2015/04/21/%E7%BD%91%E7%BB%9C%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%AE%80%E4%BB%8B/"/>
+    <id>http://enjoyhot.github.io/2015/04/21/网络搜索引擎简介/</id>
     <published>2015-04-21T05:23:50.000Z</published>
     <updated>2016-07-16T06:35:11.726Z</updated>
     
@@ -164,17 +164,17 @@
     
     </summary>
     
-      <category term="Search Engine" scheme="https://enjoyhot.github.io/categories/Search-Engine/"/>
+      <category term="Search Engine" scheme="http://enjoyhot.github.io/categories/Search-Engine/"/>
     
     
-      <category term="PageRank" scheme="https://enjoyhot.github.io/tags/PageRank/"/>
+      <category term="PageRank" scheme="http://enjoyhot.github.io/tags/PageRank/"/>
     
   </entry>
   
   <entry>
     <title>export CSDN blog to Markdown</title>
-    <link href="https://enjoyhot.github.io/2015/03/29/CSDN2Markdown/"/>
-    <id>https://enjoyhot.github.io/2015/03/29/CSDN2Markdown/</id>
+    <link href="http://enjoyhot.github.io/2015/03/29/CSDN2Markdown/"/>
+    <id>http://enjoyhot.github.io/2015/03/29/CSDN2Markdown/</id>
     <published>2015-03-29T08:40:00.000Z</published>
     <updated>2016-07-16T06:35:11.690Z</updated>
     
@@ -194,19 +194,19 @@
     
     </summary>
     
-      <category term="life" scheme="https://enjoyhot.github.io/categories/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/categories/life/"/>
     
     
-      <category term="CSDN" scheme="https://enjoyhot.github.io/tags/CSDN/"/>
+      <category term="CSDN" scheme="http://enjoyhot.github.io/tags/CSDN/"/>
     
-      <category term="markdown" scheme="https://enjoyhot.github.io/tags/markdown/"/>
+      <category term="markdown" scheme="http://enjoyhot.github.io/tags/markdown/"/>
     
   </entry>
   
   <entry>
     <title>photos</title>
-    <link href="https://enjoyhot.github.io/2015/03/26/myphoto/"/>
-    <id>https://enjoyhot.github.io/2015/03/26/myphoto/</id>
+    <link href="http://enjoyhot.github.io/2015/03/26/myphoto/"/>
+    <id>http://enjoyhot.github.io/2015/03/26/myphoto/</id>
     <published>2015-03-26T15:45:21.000Z</published>
     <updated>2016-07-16T06:35:11.706Z</updated>
     
@@ -220,17 +220,17 @@
     
     </summary>
     
-      <category term="photo" scheme="https://enjoyhot.github.io/categories/photo/"/>
+      <category term="photo" scheme="http://enjoyhot.github.io/categories/photo/"/>
     
     
-      <category term="photo" scheme="https://enjoyhot.github.io/tags/photo/"/>
+      <category term="photo" scheme="http://enjoyhot.github.io/tags/photo/"/>
     
   </entry>
   
   <entry>
     <title>HPC集群平台搭建概念</title>
-    <link href="https://enjoyhot.github.io/2015/03/24/HPC-cluster/"/>
-    <id>https://enjoyhot.github.io/2015/03/24/HPC-cluster/</id>
+    <link href="http://enjoyhot.github.io/2015/03/24/HPC-cluster/"/>
+    <id>http://enjoyhot.github.io/2015/03/24/HPC-cluster/</id>
     <published>2015-03-24T12:23:50.000Z</published>
     <updated>2016-07-16T06:35:11.694Z</updated>
     
@@ -303,17 +303,17 @@
     
     </summary>
     
-      <category term="HPC" scheme="https://enjoyhot.github.io/categories/HPC/"/>
+      <category term="HPC" scheme="http://enjoyhot.github.io/categories/HPC/"/>
     
     
-      <category term="cluster" scheme="https://enjoyhot.github.io/tags/cluster/"/>
+      <category term="cluster" scheme="http://enjoyhot.github.io/tags/cluster/"/>
     
   </entry>
   
   <entry>
     <title>HPC性能测试</title>
-    <link href="https://enjoyhot.github.io/2015/03/24/hpc-benchmark/"/>
-    <id>https://enjoyhot.github.io/2015/03/24/hpc-benchmark/</id>
+    <link href="http://enjoyhot.github.io/2015/03/24/hpc-benchmark/"/>
+    <id>http://enjoyhot.github.io/2015/03/24/hpc-benchmark/</id>
     <published>2015-03-24T06:43:00.000Z</published>
     <updated>2016-07-16T06:35:11.694Z</updated>
     
@@ -368,17 +368,17 @@
     
     </summary>
     
-      <category term="HPC" scheme="https://enjoyhot.github.io/categories/HPC/"/>
+      <category term="HPC" scheme="http://enjoyhot.github.io/categories/HPC/"/>
     
     
-      <category term="benchmark" scheme="https://enjoyhot.github.io/tags/benchmark/"/>
+      <category term="benchmark" scheme="http://enjoyhot.github.io/tags/benchmark/"/>
     
   </entry>
   
   <entry>
     <title>学习感悟</title>
-    <link href="https://enjoyhot.github.io/2015/03/19/study-thinking-20150319/"/>
-    <id>https://enjoyhot.github.io/2015/03/19/study-thinking-20150319/</id>
+    <link href="http://enjoyhot.github.io/2015/03/19/study-thinking-20150319/"/>
+    <id>http://enjoyhot.github.io/2015/03/19/study-thinking-20150319/</id>
     <published>2015-03-19T05:42:00.000Z</published>
     <updated>2016-07-16T06:35:11.722Z</updated>
     
@@ -407,17 +407,17 @@
     
     </summary>
     
-      <category term="life" scheme="https://enjoyhot.github.io/categories/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/categories/life/"/>
     
     
-      <category term="life" scheme="https://enjoyhot.github.io/tags/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>【machine learning】KNN算法        </title>
-    <link href="https://enjoyhot.github.io/2015/02/25/machinelearning-KNN/"/>
-    <id>https://enjoyhot.github.io/2015/02/25/machinelearning-KNN/</id>
+    <link href="http://enjoyhot.github.io/2015/02/25/machinelearning-KNN/"/>
+    <id>http://enjoyhot.github.io/2015/02/25/machinelearning-KNN/</id>
     <published>2015-02-25T08:04:00.000Z</published>
     <updated>2016-07-16T06:35:11.702Z</updated>
     
@@ -457,19 +457,19 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://enjoyhot.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://enjoyhot.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="ML foundation" scheme="https://enjoyhot.github.io/tags/ML-foundation/"/>
+      <category term="ML foundation" scheme="http://enjoyhot.github.io/tags/ML-foundation/"/>
     
-      <category term="classifier" scheme="https://enjoyhot.github.io/tags/classifier/"/>
+      <category term="classifier" scheme="http://enjoyhot.github.io/tags/classifier/"/>
     
   </entry>
   
   <entry>
     <title>网络爬虫框架scrapy介绍及应用——抓取新浪新闻的标题内容评论        </title>
-    <link href="https://enjoyhot.github.io/2015/01/21/python-scrapy/"/>
-    <id>https://enjoyhot.github.io/2015/01/21/python-scrapy/</id>
+    <link href="http://enjoyhot.github.io/2015/01/21/python-scrapy/"/>
+    <id>http://enjoyhot.github.io/2015/01/21/python-scrapy/</id>
     <published>2015-01-21T07:12:00.000Z</published>
     <updated>2016-07-16T06:35:11.718Z</updated>
     
@@ -539,19 +539,19 @@
     
     </summary>
     
-      <category term="python" scheme="https://enjoyhot.github.io/categories/python/"/>
+      <category term="python" scheme="http://enjoyhot.github.io/categories/python/"/>
     
     
-      <category term="spider" scheme="https://enjoyhot.github.io/tags/spider/"/>
+      <category term="spider" scheme="http://enjoyhot.github.io/tags/spider/"/>
     
-      <category term="scrapy" scheme="https://enjoyhot.github.io/tags/scrapy/"/>
+      <category term="scrapy" scheme="http://enjoyhot.github.io/tags/scrapy/"/>
     
   </entry>
   
   <entry>
     <title>【machine learning】regularization        </title>
-    <link href="https://enjoyhot.github.io/2015/01/21/machinelearning-linear-regularization/"/>
-    <id>https://enjoyhot.github.io/2015/01/21/machinelearning-linear-regularization/</id>
+    <link href="http://enjoyhot.github.io/2015/01/21/machinelearning-linear-regularization/"/>
+    <id>http://enjoyhot.github.io/2015/01/21/machinelearning-linear-regularization/</id>
     <published>2015-01-21T06:57:00.000Z</published>
     <updated>2016-07-16T06:35:11.706Z</updated>
     
@@ -620,17 +620,17 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://enjoyhot.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://enjoyhot.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="ML foundation" scheme="https://enjoyhot.github.io/tags/ML-foundation/"/>
+      <category term="ML foundation" scheme="http://enjoyhot.github.io/tags/ML-foundation/"/>
     
   </entry>
   
   <entry>
     <title>我唱自己的歌</title>
-    <link href="https://enjoyhot.github.io/2015/01/20/songsong/"/>
-    <id>https://enjoyhot.github.io/2015/01/20/songsong/</id>
+    <link href="http://enjoyhot.github.io/2015/01/20/songsong/"/>
+    <id>http://enjoyhot.github.io/2015/01/20/songsong/</id>
     <published>2015-01-20T13:30:26.000Z</published>
     <updated>2016-07-16T06:35:11.718Z</updated>
     
@@ -653,17 +653,17 @@
     
     </summary>
     
-      <category term="life" scheme="https://enjoyhot.github.io/categories/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/categories/life/"/>
     
     
-      <category term="life" scheme="https://enjoyhot.github.io/tags/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>【machine learning】linear regression        </title>
-    <link href="https://enjoyhot.github.io/2015/01/18/machinelearning-linear-regression/"/>
-    <id>https://enjoyhot.github.io/2015/01/18/machinelearning-linear-regression/</id>
+    <link href="http://enjoyhot.github.io/2015/01/18/machinelearning-linear-regression/"/>
+    <id>http://enjoyhot.github.io/2015/01/18/machinelearning-linear-regression/</id>
     <published>2015-01-18T11:43:00.000Z</published>
     <updated>2016-07-16T06:35:11.702Z</updated>
     
@@ -798,17 +798,17 @@
     
     </summary>
     
-      <category term="Machine Learning" scheme="https://enjoyhot.github.io/categories/Machine-Learning/"/>
+      <category term="Machine Learning" scheme="http://enjoyhot.github.io/categories/Machine-Learning/"/>
     
     
-      <category term="ML foundation" scheme="https://enjoyhot.github.io/tags/ML-foundation/"/>
+      <category term="ML foundation" scheme="http://enjoyhot.github.io/tags/ML-foundation/"/>
     
   </entry>
   
   <entry>
     <title>python进行文档抽取与解析的简单实现        </title>
-    <link href="https://enjoyhot.github.io/2015/01/18/python-analysis/"/>
-    <id>https://enjoyhot.github.io/2015/01/18/python-analysis/</id>
+    <link href="http://enjoyhot.github.io/2015/01/18/python-analysis/"/>
+    <id>http://enjoyhot.github.io/2015/01/18/python-analysis/</id>
     <published>2015-01-18T05:36:00.000Z</published>
     <updated>2016-07-16T06:35:11.714Z</updated>
     
@@ -845,17 +845,17 @@
     
     </summary>
     
-      <category term="python" scheme="https://enjoyhot.github.io/categories/python/"/>
+      <category term="python" scheme="http://enjoyhot.github.io/categories/python/"/>
     
     
-      <category term="spider" scheme="https://enjoyhot.github.io/tags/spider/"/>
+      <category term="spider" scheme="http://enjoyhot.github.io/tags/spider/"/>
     
   </entry>
   
   <entry>
     <title>【python web学习】python web窥探        </title>
-    <link href="https://enjoyhot.github.io/2015/01/15/python-web/"/>
-    <id>https://enjoyhot.github.io/2015/01/15/python-web/</id>
+    <link href="http://enjoyhot.github.io/2015/01/15/python-web/"/>
+    <id>http://enjoyhot.github.io/2015/01/15/python-web/</id>
     <published>2015-01-15T07:51:00.000Z</published>
     <updated>2016-07-16T06:35:11.718Z</updated>
     
@@ -983,17 +983,17 @@
     
     </summary>
     
-      <category term="python" scheme="https://enjoyhot.github.io/categories/python/"/>
+      <category term="python" scheme="http://enjoyhot.github.io/categories/python/"/>
     
     
-      <category term="python web" scheme="https://enjoyhot.github.io/tags/python-web/"/>
+      <category term="python web" scheme="http://enjoyhot.github.io/tags/python-web/"/>
     
   </entry>
   
   <entry>
     <title>python spider error occurs to Chinese words</title>
-    <link href="https://enjoyhot.github.io/2015/01/09/python-chinese/"/>
-    <id>https://enjoyhot.github.io/2015/01/09/python-chinese/</id>
+    <link href="http://enjoyhot.github.io/2015/01/09/python-chinese/"/>
+    <id>http://enjoyhot.github.io/2015/01/09/python-chinese/</id>
     <published>2015-01-09T11:51:00.000Z</published>
     <updated>2016-07-16T06:35:11.714Z</updated>
     
@@ -1011,17 +1011,17 @@
     
     </summary>
     
-      <category term="python" scheme="https://enjoyhot.github.io/categories/python/"/>
+      <category term="python" scheme="http://enjoyhot.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="https://enjoyhot.github.io/tags/python/"/>
+      <category term="python" scheme="http://enjoyhot.github.io/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>今天真是窘迫的一天</title>
-    <link href="https://enjoyhot.github.io/2014/12/28/poor-day/"/>
-    <id>https://enjoyhot.github.io/2014/12/28/poor-day/</id>
+    <link href="http://enjoyhot.github.io/2014/12/28/poor-day/"/>
+    <id>http://enjoyhot.github.io/2014/12/28/poor-day/</id>
     <published>2014-12-28T12:23:50.000Z</published>
     <updated>2016-07-16T06:35:11.710Z</updated>
     
@@ -1038,19 +1038,19 @@
     
     </summary>
     
-      <category term="life" scheme="https://enjoyhot.github.io/categories/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/categories/life/"/>
     
     
-      <category term="实验室" scheme="https://enjoyhot.github.io/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+      <category term="实验室" scheme="http://enjoyhot.github.io/tags/%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
     
-      <category term="spider" scheme="https://enjoyhot.github.io/tags/spider/"/>
+      <category term="spider" scheme="http://enjoyhot.github.io/tags/spider/"/>
     
   </entry>
   
   <entry>
     <title>考研日</title>
-    <link href="https://enjoyhot.github.io/2014/12/27/postgraduate-exam/"/>
-    <id>https://enjoyhot.github.io/2014/12/27/postgraduate-exam/</id>
+    <link href="http://enjoyhot.github.io/2014/12/27/postgraduate-exam/"/>
+    <id>http://enjoyhot.github.io/2014/12/27/postgraduate-exam/</id>
     <published>2014-12-27T12:45:09.000Z</published>
     <updated>2016-07-16T06:35:11.710Z</updated>
     
@@ -1067,17 +1067,17 @@
     
     </summary>
     
-      <category term="life" scheme="https://enjoyhot.github.io/categories/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/categories/life/"/>
     
     
-      <category term="life" scheme="https://enjoyhot.github.io/tags/life/"/>
+      <category term="life" scheme="http://enjoyhot.github.io/tags/life/"/>
     
   </entry>
   
   <entry>
     <title>html与javascript之网络篇</title>
-    <link href="https://enjoyhot.github.io/2014/12/26/html-javascript-1/"/>
-    <id>https://enjoyhot.github.io/2014/12/26/html-javascript-1/</id>
+    <link href="http://enjoyhot.github.io/2014/12/26/html-javascript-1/"/>
+    <id>http://enjoyhot.github.io/2014/12/26/html-javascript-1/</id>
     <published>2014-12-26T06:09:00.000Z</published>
     <updated>2016-07-16T06:35:11.698Z</updated>
     
@@ -1101,17 +1101,17 @@
     
     </summary>
     
-      <category term="前端" scheme="https://enjoyhot.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://enjoyhot.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="js func" scheme="https://enjoyhot.github.io/tags/js-func/"/>
+      <category term="js func" scheme="http://enjoyhot.github.io/tags/js-func/"/>
     
   </entry>
   
   <entry>
     <title>html与javascript之动态篇        </title>
-    <link href="https://enjoyhot.github.io/2014/12/26/html-javascript-2/"/>
-    <id>https://enjoyhot.github.io/2014/12/26/html-javascript-2/</id>
+    <link href="http://enjoyhot.github.io/2014/12/26/html-javascript-2/"/>
+    <id>http://enjoyhot.github.io/2014/12/26/html-javascript-2/</id>
     <published>2014-12-26T05:26:00.000Z</published>
     <updated>2016-07-16T06:35:11.698Z</updated>
     
@@ -1146,10 +1146,10 @@
     
     </summary>
     
-      <category term="前端" scheme="https://enjoyhot.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="http://enjoyhot.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
     
     
-      <category term="js func" scheme="https://enjoyhot.github.io/tags/js-func/"/>
+      <category term="js func" scheme="http://enjoyhot.github.io/tags/js-func/"/>
     
   </entry>
   
